@@ -1,0 +1,15 @@
+{
+  "name": "justo-zeal",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./styles.css -o ./tailwind.css --minify"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.3",
+    "googleapis": "^140.0.1",
+    "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.18"
+  }
+}

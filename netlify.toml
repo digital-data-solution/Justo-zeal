@@ -1,0 +1,5 @@
+[build]
+  command = "npm run build:css"
+  publish = "."
+  functions = "netlify/functions"
+  environment = { NODE_VERSION = "20" }

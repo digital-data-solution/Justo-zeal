@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justo Zeal | Smart Homes, Solar, and Security</title>
+    
+    <!-- External Links -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/68f607517d479d194d3ba2ea/1j80gp6av';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!-- Link to external CSS file (Keeping style.css as requested) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen text-gray-800 antialiased">
+    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo and Brand Name -->
+            <a href="#" class="flex items-center space-x-3">
+                <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" class="h-10 w-auto object-contain"
+                     onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
+                <div id="logo-text" class="text-2xl font-extrabold text-[var(--color-primary)]">Justo Zeal</div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#services" class="text-sm font-medium hover:text-[var(--color-primary)] transition duration-200">Our Solutions</a>
+                <a href="#process" class="text-sm font-medium hover:text-[var(--color-primary)] transition duration-200">How It Works</a>
+                <a href="#quote-form-section" class="px-4 py-2 primary-button text-white rounded-lg text-sm font-semibold">Get Started</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" onclick="toggleMobileMenu()" class="md:hidden text-gray-600 hover:text-[var(--color-primary)] focus:outline-none">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+                <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="mobile-menu-slide md:hidden absolute w-full left-0 bg-white shadow-xl z-10">
+            <div class="flex flex-col p-4 space-y-3">
+                <a href="#services" class="text-base font-medium text-gray-700 hover:text-[var(--color-primary)] p-2 rounded-lg transition duration-200" onclick="closeMobileMenu()">Our Solutions</a>
+                <a href="#process" class="text-base font-medium text-gray-700 hover:text-[var(--color-primary)] p-2 rounded-lg transition duration-200" onclick="closeMobileMenu()">How It Works</a>
+                <a href="#quote-form-section" class="mt-4 px-4 py-3 primary-button text-white rounded-lg text-base font-semibold text-center" onclick="closeMobileMenu()">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="main-gradient py-20 sm:py-32 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+                    Transform Your Property with <span class="text-white">Smart, Sustainable Solutions.</span>
+                </h1>
+                <p class="text-xl sm:text-2xl opacity-90 max-w-4xl mx-auto mb-10">
+                    From high-efficiency solar power to complete home automation and security surveillance, we **maximize comfort** and cut utility bills.
+                </p>
+                <a href="#quote-form-section" class="px-10 py-5 primary-button text-white text-xl font-bold rounded-xl shadow-lg inline-block">
+                    Start Your Automated Project →
+                </a>
+            </div>
+        </section>
+
+        <!-- Value Proposition / Trust Points -->
+        <section class="py-16 sm:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-900">
+                    Why Choose Justo Zeal?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="text-center p-6 rounded-xl shadow-lg border-t-4" style="border-color: var(--color-primary);">
+                        <div class="text-5xl mb-4 text-[var(--color-accent)]">🏠</div>
+                        <h3 class="text-xl font-semibold mb-2">Total Smart Control</h3>
+                        <p class="text-gray-600">Integrate power, security, and fittings into one smart home system for unmatched convenience and control.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl shadow-lg border-t-4" style="border-color: var(--color-primary);">
+                        <div class="text-5xl mb-4 text-[var(--color-accent)]">🛡️</div>
+                        <h3 class="text-xl font-semibold mb-2">Unbreakable Reliability</h3>
+                        <p class="text-gray-600">Enjoy consistent power and robust security with certified electrical and surveillance installations.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl shadow-lg border-t-4" style="border-color: var(--color-primary);">
+                        <div class="text-5xl mb-4 text-[var(--color-accent)]">💰</div>
+                        <h3 class="text-xl font-semibold mb-2">Long-Term Savings</h3>
+                        <p class="text-gray-600">Significantly cut utility bills and maximize property value by leveraging solar and smart energy management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 sm:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-900">
+                    Our Comprehensive Technology Solutions
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden group hover:shadow-2xl transition duration-300">
+                        <img src="images/solar panel.jpg" 
+                             alt="Solar Panel and Inverter Installation" 
+                             class="h-48 w-full object-cover group-hover:scale-[1.03] transition duration-500"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x250/f97316/ffffff?text=Solar+System';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3 text-[var(--color-primary)]">Solar Power & Inverters</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Full-service installation of high-efficiency solar panels, hybrid inverters, and battery storage for homes and industrial facilities.
+                            </p>
+                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">
+                                Get Solar Quote →
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden group hover:shadow-2xl transition duration-300">
+                        <img src="images/smart_homes.jpg" 
+                             alt="Smart Home Automation" 
+                             class="h-48 w-full object-cover group-hover:scale-[1.03] transition duration-500"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x250/1F2937/ffffff?text=Smart+Home';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3 text-[var(--color-primary)]">Smart Home & Automation</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Complete smart home setups, including lighting control, automated climate systems, and remote access via mobile.
+                            </p>
+                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">
+                                Start Smart Project →
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden group hover:shadow-2xl transition duration-300">
+                        <img src="images/cctv-security-camera-ceiling__1_-removebg-preview.png" 
+                             alt="CCTV and Electrical Wiring" 
+                             class="h-48 w-full object-cover group-hover:scale-[1.03] transition duration-500"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x250/f97316/ffffff?text=Security+CCTV';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3 text-[var(--color-primary)]">Security & Electrical Fittings</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Professional CCTV installation, comprehensive house wiring, electrical fittings, and security surveillance systems.
+                            </p>
+                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">
+                                Get Security Quote →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simple Process Section -->
+        <section id="process" class="py-16 sm:py-24 main-gradient text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">
+                    Our Simple 3-Step Project Process
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                    <div class="p-6">
+                        <div class="text-6xl font-extrabold mb-3 text-[var(--color-accent)] bg-white inline-block p-4 rounded-full shadow-lg">1</div>
+                        <h3 class="text-xl font-semibold mb-2 mt-4">Instant Quote</h3>
+                        <p class="opacity-90">Fill out our quick online form to get an automated estimate for your project needs.</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-6xl font-extrabold mb-3 text-[var(--color-accent)] bg-white inline-block p-4 rounded-full shadow-lg">2</div>
+                        <h3 class="text-xl font-semibold mb-2 mt-4">Detailed Audit</h3>
+                        <p class="opacity-90">Our team contacts you to verify details and conduct a professional site evaluation (physical or remote).</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-6xl font-extrabold mb-3 text-[var(--color-accent)] bg-white inline-block p-4 rounded-full shadow-lg">3</div>
+                        <h3 class="text-xl font-semibold mb-2 mt-4">Certified Installation</h3>
+                        <p class="opacity-90">Once finalized, we schedule and complete your professional, reliable system installation and setup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Request Form (Now full-width) -->
+        <section id="quote-form-section" class="py-16 sm:py-24 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center mb-12">
+                    <div class="text-[var(--color-primary)] font-bold text-lg mb-2">PROJECT ESTIMATOR</div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 text-center">
+                        Get Your Free Project Quote Today
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-8 text-center">
+                        Use the form below to outline your specific needs.
+                    </p>
+                </header>
+                <!-- Layout is now single column, centered -->
+                <div class="grid grid-cols-1 gap-10"> 
+                    
+                    <!-- Form Column -->
+                    <div>
+                        <div id="status-message" class="hidden p-4 mb-6 rounded-xl font-semibold text-center" role="alert"></div>
+                        <form id="quote-form-element" name="quote-form" method="POST" action="/" data-netlify="true" onsubmit="handleLeadSubmission(event)" class="bg-white p-8 md:p-10 rounded-xl shadow-2xl border-t-4" style="border-color: var(--color-primary);">
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800">1. Your Contact Details</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800 border-t pt-6 mt-6">2. Project Requirements</h3>
+                            <div class="mb-6">
+                                <label for="project_type" class="block text-sm font-medium text-gray-700 mb-1">Type of Project Needed</label>
+                                <select id="project_type" name="projectType" required 
+                                         class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none"
+                                         onchange="updateFormFields()">
+                                    <option value="">Select a Service</option>
+                                    <option value="Solar/Inverter">Solar/Inverter Installation</option>
+                                    <option value="Smart Home">Smart Home Automation</option>
+                                    <option value="CCTV/Security">CCTV/Security System</option>
+                                    <option value="Electrical Wiring">New Electrical Wiring</option>
+                                    <option value="Multiple">Multiple Services</option>
+                                </select>
+                            </div>
+                            <div id="dynamic-fields" class="space-y-6 mb-6">
+                                <!-- Dynamic fields injected here by JS -->
+                            </div>
+                            <div class="mb-8">
+                                <label for="specificNeeds" class="block text-sm font-medium text-gray-700 mb-1">Project Details (Required)</label>
+                                <textarea id="specificNeeds" name="specificNeeds" rows="4" required
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg" 
+                                          placeholder="e.g., I need a 5kVA solar setup for a 3-bedroom house, 4 rooms for automation, 8 outdoor cameras..."></textarea>
+                            </div>
+                            <button type="submit" id="submit-button" class="w-full py-4 primary-button text-white text-xl font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+                                Get Instant Quote & Submit Lead
+                            </button>
+                            <p class="text-center text-sm text-gray-500 mt-4">
+                                We respect your privacy. All leads are stored securely in Firestore.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <a href="#" onclick="document.getElementById('header').scrollIntoView({ behavior: 'smooth' }); return false;">
+                <div class="inline-block bg-white p-2 rounded-full mb-4">
+                    <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" class="h-12 w-auto object-contain"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
+                </div>
+            </a>
+            <p>&copy; 2025 Justo Zeal. All Rights Reserved.</p>
+            <p class="mt-2 text-gray-400">
+                Contact: <a href="mailto:Justozeal1@gmail.com" class="hover:text-[var(--color-primary)]">Justozeal1@gmail.com</a> | Phone: <a href="tel:+2348114377822" class="hover:text-[var(--color-primary)]">+234 811 437 7822</a>
+            </p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="https://www.instagram.com/JUSTZEAL" target="_blank" class="text-gray-400 hover:text-[var(--color-primary)] transition duration-200">Instagram (@JUSTZEAL)</a>
+                <span class="text-gray-400">|</span>
+                <a href="#" class="text-gray-400 hover:text-[var(--color-primary)] transition duration-200">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript File (Corrected) -->
+    <script src="scripts.js"></script>
+</body>
+</html>
