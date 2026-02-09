@@ -254,11 +254,19 @@
                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg" 
                                           placeholder="e.g., I need a 5kVA solar setup for a 3-bedroom house, 4 rooms for automation, 8 outdoor cameras..."></textarea>
                             </div>
-                            <button type="submit" id="submit-button" class="w-full py-4 primary-button text-white text-xl font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-                                Get Instant Quote & Submit Lead
-                            </button>
+                            
+                            <!-- Action Buttons -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <button type="submit" id="submit-button" class="w-full py-4 primary-button text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+                                    📧 Get Instant Quote
+                                </button>
+                                <button type="button" id="chat-button" onclick="openChatWithContext()" class="w-full py-4 bg-green-600 hover:bg-green-700 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+                                    💬 Discuss via Chat
+                                </button>
+                            </div>
+                            
                             <p class="text-center text-sm text-gray-500 mt-4">
-                                We respect your privacy. All leads are stored securely in Firestore.
+                                We respect your privacy. All leads are stored securely.
                             </p>
                         </form>
                     </div>
@@ -291,5 +299,93 @@
 
     <!-- External JavaScript File (Corrected) -->
     <script src="scripts.js"></script>
+    
+    <!-- Tawk.to Integration Script -->
+    <script>
+        // Function to open Tawk.to chat with pre-filled context
+        function openChatWithContext() {
+            // Collect form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const projectType = document.getElementById('project_type').value;
+            const specificNeeds = document.getElementById('specificNeeds').value;
+            
+            // Get dynamic fields based on project type
+            let additionalInfo = '';
+            const dynamicFields = document.getElementById('dynamic-fields');
+            if (dynamicFields) {
+                const inputs = dynamicFields.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    if (input.value) {
+                        const label = input.previousElementSibling?.textContent || input.name;
+                        additionalInfo += `\n${label}: ${input.value}`;
+                    }
+                });
+            }
+            
+            // Build pre-filled message
+            let message = `Hi! I'd like to request an invoice for the following project:\n\n`;
+            message += `📋 Contact Information:\n`;
+            message += `Name: ${name || 'Not provided'}\n`;
+            message += `Email: ${email || 'Not provided'}\n`;
+            message += `Phone: ${phone || 'Not provided'}\n\n`;
+            message += `🔧 Project Type: ${projectType || 'Not selected'}\n`;
+            if (additionalInfo) {
+                message += `\n📝 Project Details:${additionalInfo}\n`;
+            }
+            if (specificNeeds) {
+                message += `\n💬 Additional Notes:\n${specificNeeds}`;
+            }
+            
+            // Check if Tawk.to is loaded
+            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                // Set visitor attributes
+                if (name) {
+                    Tawk_API.setAttributes({
+                        'name': name,
+                        'email': email,
+                        'phone': phone,
+                        'projectType': projectType
+                    }, function(error){});
+                }
+                
+                // Open chat widget
+                Tawk_API.maximize();
+                
+                // Send pre-filled message after a short delay
+                setTimeout(function() {
+                    if (Tawk_API.addEvent) {
+                        Tawk_API.addEvent('Invoice Request', {
+                            projectType: projectType,
+                            name: name,
+                            email: email
+                        });
+                    }
+                    
+                    // Add message to chat input (if supported)
+                    const chatInput = document.querySelector('.tawk-textarea');
+                    if (chatInput) {
+                        chatInput.value = message;
+                    }
+                }, 500);
+            } else {
+                alert('Chat is loading... Please try again in a moment.');
+                // Retry after 2 seconds
+                setTimeout(openChatWithContext, 2000);
+            }
+        }
+        
+        // Optional: Auto-open chat when Tawk.to loads if there's a hash
+        if (window.location.hash === '#chat') {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                        Tawk_API.maximize();
+                    }
+                }, 1000);
+            });
+        }
+    </script>
 </body>
 </html>
