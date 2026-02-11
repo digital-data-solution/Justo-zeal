@@ -5,19 +5,8 @@
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// PRICING — matches the backend exactly
+// HIKVISION PRODUCT PRICING
 // ---------------------------------------------------------------------------
-const PRICING = {
-    solarPerKva:            350000,
-    batteryPerUnit:         200000,
-    panelPerUnit:           100000,
-    smartHomePerRoom:       150000,
-    alarmSystem:            200000,
-    integratedSecurity:     300000,
-    electricalWiringPerRoom:100000,
-    multipleServicesBase:   500000
-};
-
 const HIKVISION_CAMERAS = {
     'HIKVISION 2MP DOME (DS-2CE76D0T-EXIPF)':                                   12075,
     'HIKVISION 2MP BULLET (DS-2CE16D0T-EXIPF)':                                 12075,
@@ -155,86 +144,176 @@ window.updateFormFields = function () {
           </div>`;
 
     } else if (type === 'CCTV/Security') {
-        // Build camera model options
-        const cameraOptions = Object.keys(HIKVISION_CAMERAS)
-            .map(k => `<option value="${k}">${k} — ${fmt(HIKVISION_CAMERAS[k])}</option>`)
-            .join('');
-        const dvrOptions = Object.keys(HIKVISION_DVRS)
-            .map(k => `<option value="${k}">${k} — ${fmt(HIKVISION_DVRS[k])}</option>`)
-            .join('');
-        const nvrOptions = Object.keys(HIKVISION_NVRS)
-            .map(k => `<option value="${k}">${k} — ${fmt(HIKVISION_NVRS[k])}</option>`)
-            .join('');
-        const ptzOptions = Object.keys(HIKVISION_PTZ)
-            .map(k => `<option value="${k}">${k} — ${fmt(HIKVISION_PTZ[k])}</option>`)
-            .join('');
-        const psOptions = Object.keys(HIKVISION_POWER_SUPPLIES)
-            .map(k => `<option value="${k}">${k} — ${fmt(HIKVISION_POWER_SUPPLIES[k])}</option>`)
-            .join('');
+
+        // ── Camera options — grouped by technology type for easy reading ──
+        const cameraOptions = `
+          <optgroup label="📷 Analogue Cameras (Wired, cost-effective)">
+            <option value="HIKVISION 2MP DOME (DS-2CE76D0T-EXIPF)">2MP Dome — Indoor/Outdoor, Basic, Wide Angle · ${fmt(12075)}</option>
+            <option value="HIKVISION 2MP BULLET (DS-2CE16D0T-EXIPF)">2MP Bullet — Outdoor, Long-Range, Weatherproof · ${fmt(12075)}</option>
+            <option value="2MP SMART HYBRID LIGHT BULLET (DS-2CE16DOT-LPFS)">2MP Smart Hybrid Bullet — Colour Night Vision, Outdoor · ${fmt(25300)}</option>
+            <option value="2MP SMART HYBRID LIGHT DOME (DS-2CE76DOT-LPFS)">2MP Smart Hybrid Dome — Colour Night Vision, Indoor/Outdoor · ${fmt(28750)}</option>
+            <option value="HIKVISION 2MP TWO-WAY AUDIO & SIREN PT CAMERA (DS-2CE70D0T-PTLTS)">2MP Audio + Siren PT Camera — Pan/Tilt, Two-Way Audio, Alarm · ${fmt(51750)}</option>
+          </optgroup>
+          <optgroup label="🌐 IP / Network Cameras (Higher quality, PoE)">
+            <option value="2MP IP BULLET NON-AUDIO (DS-2CD1021G0-I)">2MP IP Bullet — Outdoor, IR Night Vision, No Audio · ${fmt(41400)}</option>
+            <option value="2MP IP DOME NON-AUDIO (DS-2CD1121-I)">2MP IP Dome — Indoor/Outdoor, IR Night Vision, No Audio · ${fmt(41400)}</option>
+            <option value="2MP IP SMART HYBRID LIGHT BULLET (DS-2CD1023G2-LIU / LIUF)">2MP IP Smart Hybrid Bullet — Full Colour Night, Audio · ${fmt(54050)}</option>
+            <option value="2MP IP SMART HYBRID LIGHT DOME (DS-2CD1123G2-LIU / DS-2CD1323G2-LIUF)">2MP IP Smart Hybrid Dome — Full Colour Night, Audio · ${fmt(54050)}</option>
+            <option value="2MP IP COLOURVU DOME (DS-2CD1327G2-L)">2MP IP ColourVu Dome — 24/7 Full Colour, No IR · ${fmt(60950)}</option>
+            <option value="HIKVISION 4MP DOME SMART HYBRID LIGHT CAMERA">4MP Dome Smart Hybrid — Ultra Sharp, Colour Night Vision · ${fmt(80500)}</option>
+          </optgroup>`;
+
+        // ── DVR options — grouped by channel size ──
+        const dvrOptions = `
+          <optgroup label="📹 4-Channel DVR (Up to 4 cameras)">
+            <option value="4CH DVR 1080P">4-Channel 1080P DVR — Standard HD Recording · ${fmt(41400)}</option>
+            <option value="4CH DVR 3K/5MP (iDS-7204HQHI-M1/S)">4-Channel 3K/5MP DVR — High Resolution Recording · ${fmt(71300)}</option>
+            <option value="4CH 1080P ACUSENSE DVR (iDS-7204HQHI-M1/XT)">4-Channel 1080P AcuSense DVR — Smart AI Detection · ${fmt(89700)}</option>
+          </optgroup>
+          <optgroup label="📹 8-Channel DVR (Up to 8 cameras)">
+            <option value="8CH DVR 3K/5MP (iDS-7208HQHI-M1/S)">8-Channel 3K/5MP DVR — High Resolution Recording · ${fmt(97750)}</option>
+            <option value="8CH 3K/5MP ACUSENSE DVR (iDS-7208HQHI-M1/XT)">8-Channel 3K/5MP AcuSense DVR — Smart AI Detection · ${fmt(132825)}</option>
+          </optgroup>
+          <optgroup label="📹 16-Channel DVR (Up to 16 cameras)">
+            <option value="16CH DVR 1080P (DS-7216HGHI-M1)">16-Channel 1080P DVR — Standard HD Recording · ${fmt(102350)}</option>
+            <option value="16CH DVR 3K/5MP (iDS-7216HQHI-M1/E)">16-Channel 3K/5MP DVR — High Resolution Recording · ${fmt(166750)}</option>
+          </optgroup>
+          <optgroup label="📹 32-Channel DVR (Up to 32 cameras)">
+            <option value="32CH DVR 1080P (DS-7232HGHI-M2)">32-Channel 1080P DVR — Large Site, Standard HD · ${fmt(281750)}</option>
+            <option value="32CH DVR 3K/5MP (iDS-7232HQHI-M2/S)">32-Channel 3K/5MP DVR — Large Site, High Resolution · ${fmt(377200)}</option>
+          </optgroup>`;
+
+        // ── NVR options — grouped by channel size ──
+        const nvrOptions = `
+          <optgroup label="🖥️ 8-Channel NVR (Up to 8 IP cameras)">
+            <option value="8CH NVR 1 SATA (DS-7108NI-Q1/8P/M)">8-Channel NVR with PoE — Powers cameras via cable, 1 Hard Drive Bay · ${fmt(129950)}</option>
+          </optgroup>
+          <optgroup label="🖥️ 16-Channel NVR (Up to 16 IP cameras)">
+            <option value="16CH NVR 2 SATA (DS-7616NI-Q2/16P)">16-Channel NVR with PoE — Powers cameras via cable, 2 Hard Drive Bays · ${fmt(301300)}</option>
+          </optgroup>
+          <optgroup label="🖥️ 32-Channel NVR (Up to 32 IP cameras)">
+            <option value="32CH NVR ACUSENSE NON-POE (DS-7632NXI-K2)">32-Channel AcuSense NVR — Smart AI, No PoE, 2 Hard Drive Bays · ${fmt(281750)}</option>
+            <option value="32CH NVR ACUSENSE POE (DS-7632NXI-K2/16P)">32-Channel AcuSense NVR with PoE — Smart AI, Powers cameras via cable · ${fmt(495075)}</option>
+          </optgroup>`;
+
+        // ── PTZ options ──
+        const ptzOptions = `
+          <optgroup label="🔄 PTZ Cameras (Remote pan, tilt & zoom control)">
+            <option value="2MP HD PTZ (DS-2DE4225TI-D)">2MP HD PTZ — 25× Optical Zoom, IR Night Vision, Remote Control · ${fmt(391000)}</option>
+            <option value="2MP TANDEMVU COLOURVU PTZ (DS-2SE4C225MWG-E)">2MP TandemVu ColourVu PTZ — Dual Lens, Full Colour + Zoom Simultaneously · ${fmt(460000)}</option>
+          </optgroup>`;
+
+        // ── Power Supply options ──
+        const psOptions = `
+          <optgroup label="⚡ Camera Power Supplies">
+            <option value="HIKVISION 4-WAY POWER SUPPLY">4-Way Power Supply — Powers up to 4 cameras from one unit · ${fmt(10925)}</option>
+            <option value="HIKVISION 8-WAY POWER SUPPLY">8-Way Power Supply — Powers up to 8 cameras from one unit · ${fmt(14375)}</option>
+            <option value="HIKVISION 16-WAY POWER SUPPLY">16-Way Power Supply — Powers up to 16 cameras from one unit · ${fmt(23000)}</option>
+          </optgroup>`;
 
         container.innerHTML = `
+          <!-- Helper tip -->
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
+            💡 <strong>Not sure what to pick?</strong> Dome cameras suit indoor/ceiling use. Bullet cameras are best outdoors. 
+            DVR = for analogue cameras. NVR = for IP/network cameras. Use the chat button if you need help choosing.
+          </div>
+
           <!-- Camera rows -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Camera Model &amp; Quantity</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">
+              📷 Camera Model &amp; Quantity
+              <span class="font-normal text-gray-500 ml-1">(select each model you need, set quantity)</span>
+            </label>
             <div id="camera-rows" class="space-y-3">
-              <div class="camera-row flex gap-2 items-center">
+              <div class="camera-row flex gap-2 items-start">
                 <select name="camera_model_0"
-                        class="flex-1 px-3 py-3 border border-gray-300 rounded-lg bg-white text-sm">
-                  <option value="">— Select Camera Model —</option>
+                        class="flex-1 px-3 py-3 border border-gray-300 rounded-lg bg-white text-sm"
+                        onchange="updateLiveTotal()">
+                  <option value="">— Choose a Camera Model —</option>
                   ${cameraOptions}
                 </select>
-                <input type="number" name="camera_qty_0" min="1" value="1"
-                       class="w-20 px-3 py-3 border border-gray-300 rounded-lg text-sm" placeholder="Qty">
+                <div class="flex flex-col items-center gap-1">
+                  <label class="text-xs text-gray-500">Qty</label>
+                  <input type="number" name="camera_qty_0" min="1" value="1"
+                         class="w-16 px-2 py-3 border border-gray-300 rounded-lg text-sm text-center"
+                         oninput="updateLiveTotal()">
+                </div>
               </div>
             </div>
             <button type="button" onclick="addCameraRow()"
-                    class="mt-2 text-sm text-orange-600 hover:text-orange-800 font-semibold underline">
+                    class="mt-3 text-sm text-orange-600 hover:text-orange-800 font-semibold underline">
               + Add Another Camera Model
             </button>
           </div>
 
+          <!-- Recorder selection -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="dvr_model" class="block text-sm font-medium text-gray-700 mb-1">DVR (optional)</label>
+              <label for="dvr_model" class="block text-sm font-semibold text-gray-700 mb-1">
+                📹 DVR — Digital Video Recorder
+                <span class="block font-normal text-gray-500 text-xs">For analogue/HDTVI cameras · leave blank if using NVR</span>
+              </label>
               <select id="dvr_model" name="DVR Model"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none text-sm">
-                <option value="">— No DVR —</option>
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-sm"
+                      onchange="updateLiveTotal()">
+                <option value="">— I don't need a DVR —</option>
                 ${dvrOptions}
               </select>
             </div>
             <div>
-              <label for="nvr_model" class="block text-sm font-medium text-gray-700 mb-1">NVR (optional)</label>
+              <label for="nvr_model" class="block text-sm font-semibold text-gray-700 mb-1">
+                🖥️ NVR — Network Video Recorder
+                <span class="block font-normal text-gray-500 text-xs">For IP/PoE cameras · leave blank if using DVR</span>
+              </label>
               <select id="nvr_model" name="NVR Model"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none text-sm">
-                <option value="">— No NVR —</option>
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-sm"
+                      onchange="updateLiveTotal()">
+                <option value="">— I don't need an NVR —</option>
                 ${nvrOptions}
               </select>
             </div>
+          </div>
+
+          <!-- PTZ & Power Supply -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="ptz_model" class="block text-sm font-medium text-gray-700 mb-1">PTZ Camera (optional)</label>
+              <label for="ptz_model" class="block text-sm font-semibold text-gray-700 mb-1">
+                🔄 PTZ Camera (Optional)
+                <span class="block font-normal text-gray-500 text-xs">Pan/Tilt/Zoom — remotely steerable camera</span>
+              </label>
               <select id="ptz_model" name="PTZ Model"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none text-sm">
-                <option value="">— No PTZ —</option>
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-sm"
+                      onchange="updateLiveTotal()">
+                <option value="">— No PTZ Camera —</option>
                 ${ptzOptions}
               </select>
             </div>
             <div>
-              <label for="ps_model" class="block text-sm font-medium text-gray-700 mb-1">Power Supply (optional)</label>
+              <label for="ps_model" class="block text-sm font-semibold text-gray-700 mb-1">
+                ⚡ Camera Power Supply (Optional)
+                <span class="block font-normal text-gray-500 text-xs">Centralised power unit for analogue cameras</span>
+              </label>
               <select id="ps_model" name="Power Supply Model"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none text-sm">
-                <option value="">— No Power Supply —</option>
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-sm"
+                      onchange="updateLiveTotal()">
+                <option value="">— No Power Supply Needed —</option>
                 ${psOptions}
               </select>
             </div>
           </div>
 
+          <!-- Alarm add-on -->
           <div>
-            <label for="security_type" class="block text-sm font-medium text-gray-700 mb-1">Additional Security System (optional)</label>
+            <label for="security_type" class="block text-sm font-semibold text-gray-700 mb-1">
+              🚨 Alarm / Integrated Security (Optional)
+              <span class="block font-normal text-gray-500 text-xs">Add a burglar alarm or full integrated system on top of CCTV</span>
+            </label>
             <select id="security_type" name="Security System Type"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none">
-              <option value="">None</option>
-              <option value="Alarm">Alarm System — ${fmt(PRICING.alarmSystem)}</option>
-              <option value="Integrated">Integrated CCTV + Alarm — ${fmt(PRICING.integratedSecurity)}</option>
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                    onchange="updateLiveTotal()">
+              <option value="">— CCTV Only, No Alarm Needed —</option>
+              <option value="Alarm">🔔 Alarm System Only — Motion sensors, sirens &amp; control panel · ${fmt(200000)}</option>
+              <option value="Integrated">🔐 Integrated CCTV + Alarm — Full surveillance &amp; alarm bundle · ${fmt(300000)}</option>
             </select>
           </div>`;
 
@@ -264,26 +343,43 @@ window.updateFormFields = function () {
 
 // Add extra camera row
 window.addCameraRow = function () {
-    const cameraOptions = Object.keys(HIKVISION_CAMERAS)
-        .map(k => `<option value="${k}">${k} — ${fmt(HIKVISION_CAMERAS[k])}</option>`)
-        .join('');
+    const cameraOptions = `
+      <optgroup label="📷 Analogue Cameras (Wired, cost-effective)">
+        <option value="HIKVISION 2MP DOME (DS-2CE76D0T-EXIPF)">2MP Dome — Indoor/Outdoor, Basic, Wide Angle · ${fmt(12075)}</option>
+        <option value="HIKVISION 2MP BULLET (DS-2CE16D0T-EXIPF)">2MP Bullet — Outdoor, Long-Range, Weatherproof · ${fmt(12075)}</option>
+        <option value="2MP SMART HYBRID LIGHT BULLET (DS-2CE16DOT-LPFS)">2MP Smart Hybrid Bullet — Colour Night Vision, Outdoor · ${fmt(25300)}</option>
+        <option value="2MP SMART HYBRID LIGHT DOME (DS-2CE76DOT-LPFS)">2MP Smart Hybrid Dome — Colour Night Vision, Indoor/Outdoor · ${fmt(28750)}</option>
+        <option value="HIKVISION 2MP TWO-WAY AUDIO & SIREN PT CAMERA (DS-2CE70D0T-PTLTS)">2MP Audio + Siren PT Camera — Pan/Tilt, Two-Way Audio, Alarm · ${fmt(51750)}</option>
+      </optgroup>
+      <optgroup label="🌐 IP / Network Cameras (Higher quality, PoE)">
+        <option value="2MP IP BULLET NON-AUDIO (DS-2CD1021G0-I)">2MP IP Bullet — Outdoor, IR Night Vision, No Audio · ${fmt(41400)}</option>
+        <option value="2MP IP DOME NON-AUDIO (DS-2CD1121-I)">2MP IP Dome — Indoor/Outdoor, IR Night Vision, No Audio · ${fmt(41400)}</option>
+        <option value="2MP IP SMART HYBRID LIGHT BULLET (DS-2CD1023G2-LIU / LIUF)">2MP IP Smart Hybrid Bullet — Full Colour Night, Audio · ${fmt(54050)}</option>
+        <option value="2MP IP SMART HYBRID LIGHT DOME (DS-2CD1123G2-LIU / DS-2CD1323G2-LIUF)">2MP IP Smart Hybrid Dome — Full Colour Night, Audio · ${fmt(54050)}</option>
+        <option value="2MP IP COLOURVU DOME (DS-2CD1327G2-L)">2MP IP ColourVu Dome — 24/7 Full Colour, No IR · ${fmt(60950)}</option>
+        <option value="HIKVISION 4MP DOME SMART HYBRID LIGHT CAMERA">4MP Dome Smart Hybrid — Ultra Sharp, Colour Night Vision · ${fmt(80500)}</option>
+      </optgroup>`;
     const rows = document.getElementById('camera-rows');
     if (!rows) return;
     const idx = rows.children.length;
     const div = document.createElement('div');
-    div.className = 'camera-row flex gap-2 items-center';
+    div.className = 'camera-row flex gap-2 items-start';
     div.innerHTML = `
       <select name="camera_model_${idx}"
-              class="flex-1 px-3 py-3 border border-gray-300 rounded-lg bg-white text-sm">
-        <option value="">— Select Camera Model —</option>
+              class="flex-1 px-3 py-3 border border-gray-300 rounded-lg bg-white text-sm"
+              onchange="updateLiveTotal()">
+        <option value="">— Choose a Camera Model —</option>
         ${cameraOptions}
       </select>
-      <input type="number" name="camera_qty_${idx}" min="1" value="1"
-             class="w-20 px-3 py-3 border border-gray-300 rounded-lg text-sm" placeholder="Qty">
-      <button type="button" onclick="this.parentElement.remove(); updateLiveTotal();"
-              class="text-red-500 hover:text-red-700 font-bold text-lg leading-none">✕</button>`;
+      <div class="flex flex-col items-center gap-1">
+        <label class="text-xs text-gray-500">Qty</label>
+        <input type="number" name="camera_qty_${idx}" min="1" value="1"
+               class="w-16 px-2 py-3 border border-gray-300 rounded-lg text-sm text-center"
+               oninput="updateLiveTotal()">
+      </div>
+      <button type="button" onclick="this.closest('.camera-row').remove(); updateLiveTotal();"
+              class="mt-6 text-red-500 hover:text-red-700 font-bold text-xl leading-none" title="Remove">✕</button>`;
     rows.appendChild(div);
-    // Bind live total
     div.querySelectorAll('input, select').forEach(el => {
         el.addEventListener('change', updateLiveTotal);
         el.addEventListener('input', updateLiveTotal);
@@ -323,20 +419,20 @@ function calculateLineItems() {
         const kva      = parseFloat(document.querySelector('[name="kVA Required"]')?.value) || 0;
         const batteries= parseInt(document.querySelector('[name="Number of Batteries"]')?.value) || 0;
         const panels   = parseInt(document.querySelector('[name="Number of Solar Panels"]')?.value) || 0;
-        const kvaCost  = kva * PRICING.solarPerKva;
-        const batCost  = batteries * PRICING.batteryPerUnit;
-        const panCost  = panels * PRICING.panelPerUnit;
+        const kvaCost  = kva * 350000;
+        const batCost  = batteries * 200000;
+        const panCost  = panels * 100000;
         subtotal = kvaCost + batCost + panCost;
-        if (kvaCost  > 0) lineItems.push({ desc: `Solar System (${kva} kVA)`,          qty: kva,       price: PRICING.solarPerKva,     total: kvaCost });
-        if (batCost  > 0) lineItems.push({ desc: `Batteries (${batteries} units)`,      qty: batteries, price: PRICING.batteryPerUnit,   total: batCost });
-        if (panCost  > 0) lineItems.push({ desc: `Solar Panels (${panels} units)`,      qty: panels,    price: PRICING.panelPerUnit,     total: panCost });
+        if (kvaCost  > 0) lineItems.push({ desc: `Solar System (${kva} kVA)`,          qty: kva,       price: 350000, total: kvaCost });
+        if (batCost  > 0) lineItems.push({ desc: `Batteries (${batteries} units)`,      qty: batteries, price: 200000, total: batCost });
+        if (panCost  > 0) lineItems.push({ desc: `Solar Panels (${panels} units)`,      qty: panels,    price: 100000, total: panCost });
 
     } else if (projectType === 'Smart Home') {
         const rooms   = parseInt(document.querySelector('[name="Rooms for Automation"]')?.value) || 0;
         const devices = document.querySelector('[name="Type of Devices to Automate"]')?.value || '';
-        const cost    = rooms * PRICING.smartHomePerRoom;
+        const cost    = rooms * 150000;
         subtotal = cost;
-        if (cost > 0) lineItems.push({ desc: `Smart Home Automation — ${rooms} room(s)${devices ? ', ' + devices : ''}`, qty: rooms, price: PRICING.smartHomePerRoom, total: cost });
+        if (cost > 0) lineItems.push({ desc: `Smart Home Automation — ${rooms} room(s)${devices ? ', ' + devices : ''}`, qty: rooms, price: 150000, total: cost });
 
     } else if (projectType === 'CCTV/Security') {
         // Cameras
@@ -381,24 +477,24 @@ function calculateLineItems() {
         // Security system type
         const secType = document.querySelector('[name="Security System Type"]')?.value || '';
         if (secType === 'Alarm') {
-            subtotal += PRICING.alarmSystem;
-            lineItems.push({ desc: 'Alarm System', qty: 1, price: PRICING.alarmSystem, total: PRICING.alarmSystem });
+            subtotal += 200000;
+            lineItems.push({ desc: 'Alarm System', qty: 1, price: 200000, total: 200000 });
         } else if (secType === 'Integrated') {
-            subtotal += PRICING.integratedSecurity;
-            lineItems.push({ desc: 'Integrated Security System', qty: 1, price: PRICING.integratedSecurity, total: PRICING.integratedSecurity });
+            subtotal += 300000;
+            lineItems.push({ desc: 'Integrated Security System', qty: 1, price: 300000, total: 300000 });
         }
 
     } else if (projectType === 'Electrical Wiring') {
         const rawSize = document.querySelector('[name="Building Size"]')?.value || '';
         const rooms   = parseInt(rawSize) || 4;
-        const cost    = rooms * PRICING.electricalWiringPerRoom;
+        const cost    = rooms * 100000;
         subtotal = cost;
-        if (cost > 0) lineItems.push({ desc: `Electrical Wiring (${rawSize || '4 rooms'})`, qty: rooms, price: PRICING.electricalWiringPerRoom, total: cost });
+        if (cost > 0) lineItems.push({ desc: `Electrical Wiring (${rawSize || '4 rooms'})`, qty: rooms, price: 100000, total: cost });
 
     } else if (projectType === 'Multiple') {
         const needs = document.getElementById('specificNeeds')?.value || '';
-        subtotal = PRICING.multipleServicesBase;
-        lineItems.push({ desc: `Multiple Services${needs ? ' — ' + needs : ''}`, qty: 1, price: PRICING.multipleServicesBase, total: PRICING.multipleServicesBase });
+        subtotal = 500000;
+        lineItems.push({ desc: `Multiple Services${needs ? ' — ' + needs : ''}`, qty: 1, price: 500000, total: 500000 });
     }
 
     return { subtotal, lineItems };
