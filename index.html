@@ -10,9 +10,14 @@
     <meta property="og:image" content="https://justozeal.com/images/logo-removebg-preview.png">
     <title>Justo Zeal | Smart Homes, Solar, and Security</title>
     
-    <!-- External Links -->
+    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- jsPDF — required for frontend PDF quote generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Tawk.to Live Chat -->
     <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
@@ -24,7 +29,7 @@
             s0.parentNode.insertBefore(s1,s0);
         })();
     </script>
-    <!-- Link to external CSS file (Keeping style.css as requested) -->
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen text-gray-800 antialiased">
@@ -37,21 +42,18 @@
     <!-- Header & Navigation -->
     <header id="header" class="bg-white shadow-md sticky top-0 z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Logo and Brand Name -->
             <a href="#" class="flex items-center space-x-3">
                 <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" class="h-10 w-auto object-contain"
                      onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
                 <div id="logo-text" class="text-2xl font-extrabold text-[var(--color-primary)]">Justo Zeal</div>
             </a>
             
-            <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center">
                 <a href="#services" class="text-sm font-medium hover:text-[var(--color-primary)] transition duration-200">Our Solutions</a>
                 <a href="#process" class="text-sm font-medium hover:text-[var(--color-primary)] transition duration-200">How It Works</a>
                 <a href="#quote-form-section" class="px-4 py-2 primary-button text-white rounded-lg text-sm font-semibold">Get Started</a>
             </nav>
 
-            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" onclick="toggleMobileMenu()" class="md:hidden text-gray-600 hover:text-[var(--color-primary)] focus:outline-none">
                 <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -62,7 +64,6 @@
             </button>
         </div>
         
-        <!-- Mobile Menu Drawer -->
         <div id="mobile-menu" class="mobile-menu-slide md:hidden absolute w-full left-0 bg-white shadow-xl z-10">
             <div class="flex flex-col p-4 space-y-3">
                 <a href="#services" class="text-base font-medium text-gray-700 hover:text-[var(--color-primary)] p-2 rounded-lg transition duration-200" onclick="closeMobileMenu()">Our Solutions</a>
@@ -80,7 +81,7 @@
                     Transform Your Property with <span class="text-white">Smart, Sustainable Solutions.</span>
                 </h1>
                 <p class="text-xl sm:text-2xl opacity-90 max-w-4xl mx-auto mb-10">
-                    From high-efficiency solar power to complete home automation and security surveillance, we **maximize comfort** and cut utility bills.
+                    From high-efficiency solar power to complete home automation and security surveillance, we maximize comfort and cut utility bills.
                 </p>
                 <a href="#quote-form-section" class="px-10 py-5 primary-button text-white text-xl font-bold rounded-xl shadow-lg inline-block">
                     Start Your Automated Project →
@@ -88,25 +89,23 @@
             </div>
         </section>
 
-        <!-- Value Proposition / Trust Points -->
+        <!-- Value Proposition -->
         <section class="py-16 sm:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-900">
-                    Why Choose Justo Zeal?
-                </h2>
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-900">Why Choose Justo Zeal?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div class="text-center p-6 rounded-xl shadow-lg border-t-4" style="border-color: var(--color-primary);">
-                        <div class="text-5xl mb-4 text-[var(--color-accent)]">🏠</div>
+                        <div class="text-5xl mb-4">🏠</div>
                         <h3 class="text-xl font-semibold mb-2">Total Smart Control</h3>
                         <p class="text-gray-600">Integrate power, security, and fittings into one smart home system for unmatched convenience and control.</p>
                     </div>
                     <div class="text-center p-6 rounded-xl shadow-lg border-t-4" style="border-color: var(--color-primary);">
-                        <div class="text-5xl mb-4 text-[var(--color-accent)]">🛡️</div>
+                        <div class="text-5xl mb-4">🛡️</div>
                         <h3 class="text-xl font-semibold mb-2">Unbreakable Reliability</h3>
                         <p class="text-gray-600">Enjoy consistent power and robust security with certified electrical and surveillance installations.</p>
                     </div>
                     <div class="text-center p-6 rounded-xl shadow-lg border-t-4" style="border-color: var(--color-primary);">
-                        <div class="text-5xl mb-4 text-[var(--color-accent)]">💰</div>
+                        <div class="text-5xl mb-4">💰</div>
                         <h3 class="text-xl font-semibold mb-2">Long-Term Savings</h3>
                         <p class="text-gray-600">Significantly cut utility bills and maximize property value by leveraging solar and smart energy management.</p>
                     </div>
@@ -117,126 +116,105 @@
         <!-- Services Section -->
         <section id="services" class="py-16 sm:py-24 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-900">
-                    Our Comprehensive Technology Solutions
-                </h2>
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-900">Our Comprehensive Technology Solutions</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     <div class="bg-white rounded-xl shadow-xl overflow-hidden group hover:shadow-2xl transition duration-300">
-                        <img src="images/solar panel.jpg" 
-                             alt="Solar Panel and Inverter Installation" 
+                        <img src="images/solar panel.jpg" alt="Solar Panel and Inverter Installation"
                              class="h-48 w-full object-cover group-hover:scale-[1.03] transition duration-500"
                              onerror="this.onerror=null; this.src='https://placehold.co/400x250/f97316/ffffff?text=Solar+System';">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3 text-[var(--color-primary)]">Solar Power & Inverters</h3>
-                            <p class="text-gray-700 mb-4 text-sm">
-                                Full-service installation of high-efficiency solar panels, hybrid inverters, and battery storage for homes and industrial facilities.
-                            </p>
-                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">
-                                Get Solar Quote →
-                            </a>
+                            <p class="text-gray-700 mb-4 text-sm">Full-service installation of high-efficiency solar panels, hybrid inverters, and battery storage for homes and industrial facilities.</p>
+                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">Get Solar Quote →</a>
                         </div>
                     </div>
                     <div class="bg-white rounded-xl shadow-xl overflow-hidden group hover:shadow-2xl transition duration-300">
-                        <img src="images/smart_homes.jpg" 
-                             alt="Smart Home Automation" 
+                        <img src="images/smart_homes.jpg" alt="Smart Home Automation"
                              class="h-48 w-full object-cover group-hover:scale-[1.03] transition duration-500"
                              onerror="this.onerror=null; this.src='https://placehold.co/400x250/1F2937/ffffff?text=Smart+Home';">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3 text-[var(--color-primary)]">Smart Home & Automation</h3>
-                            <p class="text-gray-700 mb-4 text-sm">
-                                Complete smart home setups, including lighting control, automated climate systems, and remote access via mobile.
-                            </p>
-                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">
-                                Start Smart Project →
-                            </a>
+                            <p class="text-gray-700 mb-4 text-sm">Complete smart home setups, including lighting control, automated climate systems, and remote access via mobile.</p>
+                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">Start Smart Project →</a>
                         </div>
                     </div>
                     <div class="bg-white rounded-xl shadow-xl overflow-hidden group hover:shadow-2xl transition duration-300">
-                        <img src="images/cctv-security-camera-ceiling__1_-removebg-preview.png" 
-                             alt="CCTV and Electrical Wiring" 
+                        <img src="images/cctv-security-camera-ceiling__1_-removebg-preview.png" alt="CCTV and Electrical Wiring"
                              class="h-48 w-full object-cover group-hover:scale-[1.03] transition duration-500"
                              onerror="this.onerror=null; this.src='https://placehold.co/400x250/f97316/ffffff?text=Security+CCTV';">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3 text-[var(--color-primary)]">Security & Electrical Fittings</h3>
-                            <p class="text-gray-700 mb-4 text-sm">
-                                Professional CCTV installation, comprehensive house wiring, electrical fittings, and security surveillance systems.
-                            </p>
-                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">
-                                Get Security Quote →
-                            </a>
+                            <p class="text-gray-700 mb-4 text-sm">Professional CCTV installation, comprehensive house wiring, electrical fittings, and security surveillance systems.</p>
+                            <a href="#quote-form-section" class="font-semibold text-sm transition duration-200 text-[var(--color-primary)] hover:text-[#EA580C]">Get Security Quote →</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Simple Process Section -->
+        <!-- Process Section -->
         <section id="process" class="py-16 sm:py-24 main-gradient text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">
-                    Our Simple 3-Step Project Process
-                </h2>
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Our Simple 3-Step Project Process</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
                     <div class="p-6">
                         <div class="text-6xl font-extrabold mb-3 text-[var(--color-accent)] bg-white inline-block p-4 rounded-full shadow-lg">1</div>
                         <h3 class="text-xl font-semibold mb-2 mt-4">Instant Quote</h3>
-                        <p class="opacity-90">Fill out our quick online form to get an automated estimate for your project needs.</p>
+                        <p class="opacity-90">Fill out our quick form to instantly download a PDF quote for your project.</p>
                     </div>
                     <div class="p-6">
                         <div class="text-6xl font-extrabold mb-3 text-[var(--color-accent)] bg-white inline-block p-4 rounded-full shadow-lg">2</div>
                         <h3 class="text-xl font-semibold mb-2 mt-4">Detailed Audit</h3>
-                        <p class="opacity-90">Our team contacts you to verify details and conduct a professional site evaluation (physical or remote).</p>
+                        <p class="opacity-90">Our team contacts you to verify details and conduct a professional site evaluation.</p>
                     </div>
                     <div class="p-6">
                         <div class="text-6xl font-extrabold mb-3 text-[var(--color-accent)] bg-white inline-block p-4 rounded-full shadow-lg">3</div>
                         <h3 class="text-xl font-semibold mb-2 mt-4">Certified Installation</h3>
-                        <p class="opacity-90">Once finalized, we schedule and complete your professional, reliable system installation and setup.</p>
+                        <p class="opacity-90">We schedule and complete your professional, reliable system installation and setup.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Quote Request Form (Now full-width) -->
+        <!-- Quote Form -->
         <section id="quote-form-section" class="py-16 sm:py-24 bg-gray-50">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <header class="text-center mb-12">
                     <div class="text-[var(--color-primary)] font-bold text-lg mb-2">PROJECT ESTIMATOR</div>
-                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 text-center">
-                        Get Your Free Project Quote Today
-                    </h2>
-                    <p class="text-xl text-gray-600 mb-8 text-center">
-                        Use the form below to outline your specific needs.
-                    </p>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-900">Get Your Free Project Quote Today</h2>
+                    <p class="text-xl text-gray-600 mb-2">Fill in your details below — your PDF quote downloads instantly.</p>
                 </header>
-                <!-- Layout is now single column, centered -->
-                <div class="grid grid-cols-1 gap-10"> 
-                    
-                    <!-- Form Column -->
+                <div class="grid grid-cols-1 gap-10">
                     <div>
                         <div id="status-message" class="hidden p-4 mb-6 rounded-xl font-semibold text-center" role="alert"></div>
-                        <form id="quote-form-element" name="quote-form" method="POST" action="/" data-netlify="true" onsubmit="handleLeadSubmission(event)" class="bg-white p-8 md:p-10 rounded-xl shadow-2xl border-t-4" style="border-color: var(--color-primary);">
+                        <form id="quote-form-element" onsubmit="handleLeadSubmission(event)"
+                              class="bg-white p-8 md:p-10 rounded-xl shadow-2xl border-t-4" style="border-color: var(--color-primary);">
+
                             <h3 class="text-2xl font-bold mb-6 text-gray-800">1. Your Contact Details</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                                    <input type="text" id="name" name="name" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
                                 </div>
                                 <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                                    <input type="email" id="email" name="email" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
                                 </div>
                             </div>
                             
                             <h3 class="text-2xl font-bold mb-6 text-gray-800 border-t pt-6 mt-6">2. Project Requirements</h3>
                             <div class="mb-6">
-                                <label for="project_type" class="block text-sm font-medium text-gray-700 mb-1">Type of Project Needed</label>
-                                <select id="project_type" name="projectType" required 
-                                         class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none"
-                                         onchange="updateFormFields()">
+                                <label for="project_type" class="block text-sm font-medium text-gray-700 mb-1">Type of Project Needed *</label>
+                                <select id="project_type" name="projectType" required
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                        onchange="updateFormFields()">
                                     <option value="">Select a Service</option>
                                     <option value="Solar/Inverter">Solar/Inverter Installation</option>
                                     <option value="Smart Home">Smart Home Automation</option>
@@ -245,35 +223,37 @@
                                     <option value="Multiple">Multiple Services</option>
                                 </select>
                             </div>
-                            <div id="dynamic-fields" class="space-y-6 mb-6">
-                                <!-- Dynamic fields injected here by JS -->
-                            </div>
+
+                            <!-- Dynamic fields injected by scripts.js -->
+                            <div id="dynamic-fields" class="space-y-6 mb-6"></div>
+
                             <div class="mb-8">
-                                <label for="specificNeeds" class="block text-sm font-medium text-gray-700 mb-1">Project Details (Required)</label>
+                                <label for="specificNeeds" class="block text-sm font-medium text-gray-700 mb-1">Project Details *</label>
                                 <textarea id="specificNeeds" name="specificNeeds" rows="4" required
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg" 
-                                          placeholder="e.g., I need a 5kVA solar setup for a 3-bedroom house, 4 rooms for automation, 8 outdoor cameras..."></textarea>
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                          placeholder="e.g., 5kVA solar for 3-bedroom house, 8 outdoor cameras for warehouse, etc."></textarea>
                             </div>
                             
                             <!-- Action Buttons -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <button type="submit" id="submit-button" class="w-full py-4 primary-button text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-                                    📧 Get Instant Quote
+                                <button type="submit" id="submit-button"
+                                        class="w-full py-4 primary-button text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+                                    📥 Download Quote PDF
                                 </button>
-                                <button type="button" id="chat-button" onclick="openChatWithContext()" class="w-full py-4 bg-green-600 hover:bg-green-700 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+                                <button type="button" onclick="openChatWithContext()"
+                                        class="w-full py-4 bg-green-600 hover:bg-green-700 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
                                     💬 Discuss via Chat
                                 </button>
                             </div>
                             
                             <p class="text-center text-sm text-gray-500 mt-4">
-                                We respect your privacy. All leads are stored securely.
+                                🔒 Your information is kept private. Quote downloads instantly — no email required.
                             </p>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
@@ -287,7 +267,8 @@
             </a>
             <p>&copy; 2025 Justo Zeal. All Rights Reserved.</p>
             <p class="mt-2 text-gray-400">
-                Contact: <a href="mailto:Justozeal1@gmail.com" class="hover:text-[var(--color-primary)]">Justozeal1@gmail.com</a> | Phone: <a href="tel:+2348114377822" class="hover:text-[var(--color-primary)]">+234 811 437 7822</a>
+                Contact: <a href="mailto:Justozeal1@gmail.com" class="hover:text-[var(--color-primary)]">Justozeal1@gmail.com</a>
+                | Phone: <a href="tel:+2348114377822" class="hover:text-[var(--color-primary)]">+234 811 437 7822</a>
             </p>
             <div class="mt-4 flex justify-center space-x-4">
                 <a href="https://www.instagram.com/JUSTZEAL" target="_blank" class="text-gray-400 hover:text-[var(--color-primary)] transition duration-200">Instagram (@JUSTZEAL)</a>
@@ -297,95 +278,7 @@
         </div>
     </footer>
 
-    <!-- External JavaScript File (Corrected) -->
+    <!-- scripts.js must come AFTER jsPDF is loaded -->
     <script src="scripts.js"></script>
-    
-    <!-- Tawk.to Integration Script -->
-    <script>
-        // Function to open Tawk.to chat with pre-filled context
-        function openChatWithContext() {
-            // Collect form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const projectType = document.getElementById('project_type').value;
-            const specificNeeds = document.getElementById('specificNeeds').value;
-            
-            // Get dynamic fields based on project type
-            let additionalInfo = '';
-            const dynamicFields = document.getElementById('dynamic-fields');
-            if (dynamicFields) {
-                const inputs = dynamicFields.querySelectorAll('input, select, textarea');
-                inputs.forEach(input => {
-                    if (input.value) {
-                        const label = input.previousElementSibling?.textContent || input.name;
-                        additionalInfo += `\n${label}: ${input.value}`;
-                    }
-                });
-            }
-            
-            // Build pre-filled message
-            let message = `Hi! I'd like to request an invoice for the following project:\n\n`;
-            message += `📋 Contact Information:\n`;
-            message += `Name: ${name || 'Not provided'}\n`;
-            message += `Email: ${email || 'Not provided'}\n`;
-            message += `Phone: ${phone || 'Not provided'}\n\n`;
-            message += `🔧 Project Type: ${projectType || 'Not selected'}\n`;
-            if (additionalInfo) {
-                message += `\n📝 Project Details:${additionalInfo}\n`;
-            }
-            if (specificNeeds) {
-                message += `\n💬 Additional Notes:\n${specificNeeds}`;
-            }
-            
-            // Check if Tawk.to is loaded
-            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-                // Set visitor attributes
-                if (name) {
-                    Tawk_API.setAttributes({
-                        'name': name,
-                        'email': email,
-                        'phone': phone,
-                        'projectType': projectType
-                    }, function(error){});
-                }
-                
-                // Open chat widget
-                Tawk_API.maximize();
-                
-                // Send pre-filled message after a short delay
-                setTimeout(function() {
-                    if (Tawk_API.addEvent) {
-                        Tawk_API.addEvent('Invoice Request', {
-                            projectType: projectType,
-                            name: name,
-                            email: email
-                        });
-                    }
-                    
-                    // Add message to chat input (if supported)
-                    const chatInput = document.querySelector('.tawk-textarea');
-                    if (chatInput) {
-                        chatInput.value = message;
-                    }
-                }, 500);
-            } else {
-                alert('Chat is loading... Please try again in a moment.');
-                // Retry after 2 seconds
-                setTimeout(openChatWithContext, 2000);
-            }
-        }
-        
-        // Optional: Auto-open chat when Tawk.to loads if there's a hash
-        if (window.location.hash === '#chat') {
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-                        Tawk_API.maximize();
-                    }
-                }, 1000);
-            });
-        }
-    </script>
 </body>
 </html>
