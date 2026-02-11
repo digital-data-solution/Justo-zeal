@@ -10,9 +10,14 @@
     <meta property="og:image" content="https://justozeal.com/images/logo-removebg-preview.png">
     <title>Justo Zeal | Smart Homes, Solar, and Security</title>
 
-    <!-- External Libraries -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind (utility helpers — layout, spacing, grid) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Brand styles -->
+    <link rel="stylesheet" href="styles.css">
 
     <!-- jsPDF — required for frontend PDF quote generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -29,245 +34,6 @@
             s0.parentNode.insertBefore(s1,s0);
         })();
     </script>
-
-    <style>
-        :root {
-            --color-primary: #f97316;
-            --color-primary-dark: #ea580c;
-            --color-accent: #f97316;
-            --font-display: 'Syne', sans-serif;
-            --font-body: 'DM Sans', sans-serif;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: var(--font-body);
-            background: #fafaf9;
-            color: #1c1917;
-        }
-
-        h1, h2, h3, h4, .brand-text {
-            font-family: var(--font-display);
-        }
-
-        /* ── Loading Overlay ── */
-        #loading-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(249,115,22,0.12);
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-        }
-        .spinner {
-            width: 52px; height: 52px;
-            border: 5px solid #fed7aa;
-            border-top-color: #f97316;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ── Primary Button ── */
-        .primary-button {
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            transition: transform 0.15s, box-shadow 0.15s;
-        }
-        .primary-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(249,115,22,0.35);
-        }
-        .primary-button:active { transform: translateY(0); }
-
-        /* ── Hero gradient ── */
-        .main-gradient {
-            background: linear-gradient(145deg, #1c1917 0%, #292524 40%, #431407 100%);
-        }
-
-        /* ── Mobile Menu ── */
-        .mobile-menu-slide {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .mobile-menu-slide.active { max-height: 400px; }
-
-        /* ── Form inputs ── */
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1.5px solid #e7e5e4;
-            border-radius: 0.625rem;
-            background: #fff;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            color: #1c1917;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        .form-input:focus {
-            border-color: #f97316;
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
-        }
-        select.form-input {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.85rem center;
-            padding-right: 2.5rem;
-            cursor: pointer;
-        }
-
-        /* ── Dynamic-fields container ── */
-        #dynamic-fields {
-            background: #fef7f0;
-            border: 1.5px dashed #fdba74;
-            border-radius: 0.875rem;
-            padding: 1.5rem;
-            min-height: 80px;
-            transition: all 0.3s;
-        }
-        #dynamic-fields:empty::before {
-            content: "↑  Select a service above to see project-specific options";
-            display: block;
-            text-align: center;
-            color: #a8a29e;
-            font-size: 0.875rem;
-            padding: 1rem 0;
-        }
-
-        /* dynamic fields inject their own selects — make them use our styling */
-        #dynamic-fields select,
-        #dynamic-fields input[type="text"],
-        #dynamic-fields input[type="number"] {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1.5px solid #e7e5e4;
-            border-radius: 0.625rem;
-            background: #fff;
-            font-family: var(--font-body);
-            font-size: 0.875rem;
-            color: #1c1917;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            outline: none;
-        }
-        #dynamic-fields select {
-            -webkit-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.85rem center;
-            padding-right: 2.5rem;
-            cursor: pointer;
-        }
-        #dynamic-fields select:focus,
-        #dynamic-fields input:focus {
-            border-color: #f97316;
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
-        }
-
-        /* camera-row qty input override — keep it narrow */
-        #dynamic-fields .camera-row input[type="number"] {
-            width: 4rem;
-            text-align: center;
-            padding: 0.75rem 0.25rem;
-        }
-
-        /* ── Live Total chip ── */
-        #live-total {
-            margin-top: 1rem;
-            padding: 0.875rem 1.25rem;
-            background: linear-gradient(135deg, #fff7ed, #ffedd5);
-            border: 1.5px solid #fdba74;
-            border-radius: 0.75rem;
-            text-align: right;
-            font-family: var(--font-display);
-            font-weight: 700;
-            color: #c2410c;
-            font-size: 1rem;
-        }
-        #live-total span { font-size: 1.5rem; color: #ea580c; }
-
-        /* ── Service cards ── */
-        .service-card {
-            border-radius: 1rem;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            transition: transform 0.25s, box-shadow 0.25s;
-            border-top: 4px solid var(--color-primary);
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(249,115,22,0.15);
-        }
-
-        /* ── Step circles ── */
-        .step-circle {
-            width: 72px; height: 72px;
-            border-radius: 50%;
-            background: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: #f97316;
-            margin: 0 auto 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-        }
-
-        /* ── Quote form wrapper ── */
-        #quote-form-element {
-            background: #fff;
-            border-radius: 1.25rem;
-            border-top: 5px solid #f97316;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
-            padding: 2.5rem;
-        }
-
-        /* ── Section labels inside the form ── */
-        .form-section-label {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1c1917;
-            border-top: 1px solid #f3f4f6;
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1.25rem;
-        }
-        .form-section-label:first-of-type {
-            border-top: none;
-            padding-top: 0;
-            margin-top: 0;
-        }
-
-        /* ── Status message ── */
-        #status-message {
-            border-radius: 0.75rem;
-            font-family: var(--font-body);
-        }
-
-        /* ── Footer ── */
-        footer {
-            background: #1c1917;
-        }
-
-        /* ── Scroll reveal ── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: none;
-        }
-    </style>
 </head>
 <body class="min-h-screen antialiased">
 
@@ -279,27 +45,26 @@
     <!-- ═══════════════════════════════════════════
          HEADER
     ═══════════════════════════════════════════ -->
-    <header id="header" class="bg-white shadow-sm sticky top-0 z-20 border-b border-stone-100">
+    <header id="header">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3">
                 <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo"
-                     class="h-10 w-auto object-contain"
+                     class="logo-img"
                      onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
-                <span class="brand-text text-2xl font-extrabold" style="color: var(--color-primary);">Justo Zeal</span>
+                <span class="logo-wordmark">Justo Zeal</span>
             </a>
 
             <nav class="hidden md:flex items-center gap-6">
-                <a href="#services" class="text-sm font-medium text-stone-600 hover:text-orange-500 transition">Our Solutions</a>
-                <a href="#process"  class="text-sm font-medium text-stone-600 hover:text-orange-500 transition">How It Works</a>
-                <a href="#quote-form-section"
-                   class="primary-button px-5 py-2.5 text-white text-sm font-semibold rounded-lg">
+                <a href="#services" class="nav-link">Our Solutions</a>
+                <a href="#process"  class="nav-link">How It Works</a>
+                <a href="#quote-form-section" class="primary-button px-5 py-2.5 text-sm rounded-lg">
                     Get a Quote
                 </a>
             </nav>
 
             <button id="mobile-menu-button" onclick="toggleMobileMenu()"
                     class="md:hidden text-stone-600 hover:text-orange-500 focus:outline-none">
-                <svg id="menu-icon"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
                 </svg>
                 <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -308,12 +73,12 @@
             </button>
         </div>
 
-        <div id="mobile-menu" class="mobile-menu-slide md:hidden bg-white border-t border-stone-100 absolute w-full left-0 z-10 shadow-lg">
+        <div id="mobile-menu" class="mobile-menu-slide md:hidden">
             <div class="flex flex-col p-4 gap-2">
-                <a href="#services" onclick="closeMobileMenu()" class="p-3 text-sm font-medium text-stone-700 hover:text-orange-500 rounded-lg transition">Our Solutions</a>
-                <a href="#process"  onclick="closeMobileMenu()" class="p-3 text-sm font-medium text-stone-700 hover:text-orange-500 rounded-lg transition">How It Works</a>
+                <a href="#services" onclick="closeMobileMenu()" class="mobile-nav-link">Our Solutions</a>
+                <a href="#process"  onclick="closeMobileMenu()" class="mobile-nav-link">How It Works</a>
                 <a href="#quote-form-section" onclick="closeMobileMenu()"
-                   class="primary-button mt-2 py-3 text-white text-sm font-semibold rounded-xl text-center">Get a Quote</a>
+                   class="primary-button mt-2 py-3 text-sm rounded-xl text-center">Get a Quote</a>
             </div>
         </div>
     </header>
@@ -323,26 +88,20 @@
         <!-- ═══════════════════════════════════════════
              HERO
         ═══════════════════════════════════════════ -->
-        <section class="main-gradient py-24 sm:py-36 text-white relative overflow-hidden">
-            <!-- decorative circles -->
-            <div class="absolute -top-20 -right-20 w-96 h-96 rounded-full opacity-10"
-                 style="background: radial-gradient(circle, #f97316, transparent 70%);"></div>
-            <div class="absolute -bottom-16 -left-16 w-72 h-72 rounded-full opacity-10"
-                 style="background: radial-gradient(circle, #ea580c, transparent 70%);"></div>
+        <section class="main-gradient py-24 sm:py-36 text-white">
+            <div class="hero-glow-top"></div>
+            <div class="hero-glow-bottom"></div>
 
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <p class="text-orange-400 font-semibold text-sm tracking-widest uppercase mb-4">
-                    Professional Installation · Nigeria
-                </p>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                <p class="hero-eyebrow">Professional Installation · Nigeria</p>
+                <h1 class="hero-title">
                     Transform Your Property with<br>
-                    <span style="color: #fb923c;">Smart, Sustainable Solutions.</span>
+                    <span>Smart, Sustainable Solutions.</span>
                 </h1>
-                <p class="text-lg sm:text-xl text-stone-300 max-w-3xl mx-auto mb-10">
+                <p class="hero-subtitle">
                     From high-efficiency solar power to complete home automation and Hikvision CCTV surveillance — we maximise comfort and cut utility bills.
                 </p>
-                <a href="#quote-form-section"
-                   class="primary-button inline-block px-10 py-5 text-white text-lg font-bold rounded-xl shadow-xl">
+                <a href="#quote-form-section" class="primary-button px-10 py-5 text-lg rounded-xl">
                     Get Your Free Quote Now →
                 </a>
             </div>
@@ -353,24 +112,22 @@
         ═══════════════════════════════════════════ -->
         <section class="py-16 bg-white">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-12 text-stone-900">
-                    Why Choose Justo Zeal?
-                </h2>
+                <h2 class="section-title">Why Choose Justo Zeal?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="service-card p-7 reveal text-center">
-                        <div class="text-5xl mb-4">🏠</div>
-                        <h3 class="text-lg font-bold mb-2">Total Smart Control</h3>
-                        <p class="text-stone-600 text-sm">Integrate power, security, and fittings into one smart home system for unmatched convenience.</p>
+                    <div class="value-card reveal">
+                        <div class="value-card__icon">🏠</div>
+                        <h3 class="value-card__title">Total Smart Control</h3>
+                        <p class="value-card__text">Integrate power, security, and fittings into one smart home system for unmatched convenience.</p>
                     </div>
-                    <div class="service-card p-7 reveal text-center" style="transition-delay:0.1s">
-                        <div class="text-5xl mb-4">🛡️</div>
-                        <h3 class="text-lg font-bold mb-2">Unbreakable Reliability</h3>
-                        <p class="text-stone-600 text-sm">Certified electrical and Hikvision surveillance installations that work 24/7.</p>
+                    <div class="value-card reveal" style="transition-delay:0.1s">
+                        <div class="value-card__icon">🛡️</div>
+                        <h3 class="value-card__title">Unbreakable Reliability</h3>
+                        <p class="value-card__text">Certified electrical and Hikvision surveillance installations that work 24/7.</p>
                     </div>
-                    <div class="service-card p-7 reveal text-center" style="transition-delay:0.2s">
-                        <div class="text-5xl mb-4">💰</div>
-                        <h3 class="text-lg font-bold mb-2">Long-Term Savings</h3>
-                        <p class="text-stone-600 text-sm">Significantly cut utility bills and maximise property value with solar and smart energy management.</p>
+                    <div class="value-card reveal" style="transition-delay:0.2s">
+                        <div class="value-card__icon">💰</div>
+                        <h3 class="value-card__title">Long-Term Savings</h3>
+                        <p class="value-card__text">Significantly cut utility bills and maximise property value with solar and smart energy management.</p>
                     </div>
                 </div>
             </div>
@@ -381,40 +138,42 @@
         ═══════════════════════════════════════════ -->
         <section id="services" class="py-16 sm:py-24 bg-stone-50">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-12 text-stone-900">
-                    Our Comprehensive Technology Solutions
-                </h2>
+                <h2 class="section-title">Our Comprehensive Technology Solutions</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
                     <div class="service-card reveal">
                         <img src="images/solar panel.jpg" alt="Solar Panel and Inverter Installation"
-                             class="h-48 w-full object-cover"
+                             class="service-card__image"
                              onerror="this.onerror=null; this.src='https://placehold.co/400x250/f97316/ffffff?text=Solar+System';">
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2" style="color: var(--color-primary);">Solar Power & Inverters</h3>
-                            <p class="text-stone-600 text-sm mb-4">High-efficiency solar panels, hybrid inverters, and battery storage for homes and businesses.</p>
-                            <a href="#quote-form-section" class="text-sm font-semibold text-orange-500 hover:text-orange-700 transition">Get Solar Quote →</a>
+                        <div class="service-card__body">
+                            <h3 class="service-card__title">Solar Power & Inverters</h3>
+                            <p class="service-card__text">High-efficiency solar panels, hybrid inverters, and battery storage for homes and businesses.</p>
+                            <a href="#quote-form-section" class="service-card__link">Get Solar Quote →</a>
                         </div>
                     </div>
+
                     <div class="service-card reveal" style="transition-delay:0.1s">
                         <img src="images/smart_homes.jpg" alt="Smart Home Automation"
-                             class="h-48 w-full object-cover"
+                             class="service-card__image"
                              onerror="this.onerror=null; this.src='https://placehold.co/400x250/1F2937/ffffff?text=Smart+Home';">
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2" style="color: var(--color-primary);">Smart Home & Automation</h3>
-                            <p class="text-stone-600 text-sm mb-4">Lighting control, automated climate systems, and full remote access via mobile.</p>
-                            <a href="#quote-form-section" class="text-sm font-semibold text-orange-500 hover:text-orange-700 transition">Start Smart Project →</a>
+                        <div class="service-card__body">
+                            <h3 class="service-card__title">Smart Home & Automation</h3>
+                            <p class="service-card__text">Lighting control, automated climate systems, and full remote access via mobile.</p>
+                            <a href="#quote-form-section" class="service-card__link">Start Smart Project →</a>
                         </div>
                     </div>
+
                     <div class="service-card reveal" style="transition-delay:0.2s">
                         <img src="images/cctv-security-camera-ceiling__1_-removebg-preview.png" alt="CCTV and Security"
-                             class="h-48 w-full object-cover"
+                             class="service-card__image"
                              onerror="this.onerror=null; this.src='https://placehold.co/400x250/f97316/ffffff?text=Security+CCTV';">
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2" style="color: var(--color-primary);">Security & Electrical Fittings</h3>
-                            <p class="text-stone-600 text-sm mb-4">Hikvision CCTV cameras, DVR/NVR systems, house wiring, and alarm installation.</p>
-                            <a href="#quote-form-section" class="text-sm font-semibold text-orange-500 hover:text-orange-700 transition">Get Security Quote →</a>
+                        <div class="service-card__body">
+                            <h3 class="service-card__title">Security & Electrical Fittings</h3>
+                            <p class="service-card__text">Hikvision CCTV cameras, DVR/NVR systems, house wiring, and alarm installation.</p>
+                            <a href="#quote-form-section" class="service-card__link">Get Security Quote →</a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -422,39 +181,38 @@
         <!-- ═══════════════════════════════════════════
              HOW IT WORKS
         ═══════════════════════════════════════════ -->
-        <section id="process" class="py-16 sm:py-24 main-gradient text-white">
+        <section id="process" class="main-gradient py-16 sm:py-24">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-14">Our Simple 3-Step Process</h2>
+                <h2 class="section-title section-title-light">Our Simple 3-Step Process</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
                     <div class="reveal">
                         <div class="step-circle">1</div>
-                        <h3 class="text-xl font-bold mb-2">Instant Quote</h3>
-                        <p class="text-stone-300 text-sm">Fill the form below — your PDF quote downloads instantly with itemised pricing.</p>
+                        <h3 class="step-title">Instant Quote</h3>
+                        <p class="step-text">Fill the form below — your PDF quote downloads instantly with itemised pricing.</p>
                     </div>
                     <div class="reveal" style="transition-delay:0.1s">
                         <div class="step-circle">2</div>
-                        <h3 class="text-xl font-bold mb-2">Site Audit</h3>
-                        <p class="text-stone-300 text-sm">Our team contacts you to verify details and conduct a professional site evaluation.</p>
+                        <h3 class="step-title">Site Audit</h3>
+                        <p class="step-text">Our team contacts you to verify details and conduct a professional site evaluation.</p>
                     </div>
                     <div class="reveal" style="transition-delay:0.2s">
                         <div class="step-circle">3</div>
-                        <h3 class="text-xl font-bold mb-2">Certified Install</h3>
-                        <p class="text-stone-300 text-sm">We schedule and complete your professional installation, fully commissioned and tested.</p>
+                        <h3 class="step-title">Certified Install</h3>
+                        <p class="step-text">We schedule and complete your professional installation, fully commissioned and tested.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ═══════════════════════════════════════════
-             QUOTE FORM  ← aligned to scripts.js
+             QUOTE FORM
         ═══════════════════════════════════════════ -->
         <section id="quote-form-section" class="py-16 sm:py-24 bg-stone-50">
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <!-- Section header -->
                 <div class="text-center mb-10">
-                    <p class="text-orange-500 font-bold text-sm tracking-widest uppercase mb-2">Project Estimator</p>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mb-3">
+                    <p class="section-eyebrow">Project Estimator</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mb-3" style="font-family: var(--font-display);">
                         Get Your Free Quote Today
                     </h2>
                     <p class="text-stone-500 text-lg">
@@ -462,35 +220,34 @@
                     </p>
                 </div>
 
-                <!-- Status message (shown after submit) -->
-                <div id="status-message" class="hidden mb-6 p-4 rounded-xl font-semibold text-center" role="alert"></div>
+                <!-- Status message shown after submit -->
+                <div id="status-message" class="hidden" role="alert"></div>
 
-                <!-- ── FORM ─────────────────────────────────────── -->
+                <!-- ── FORM ── -->
                 <form id="quote-form-element" onsubmit="handleLeadSubmission(event)">
 
-                    <!-- STEP 1: Contact Details -->
                     <h3 class="form-section-label">1. Your Contact Details</h3>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                         <div>
-                            <label for="name" class="block text-sm font-semibold text-stone-700 mb-1">
-                                Full Name <span class="text-orange-500">*</span>
+                            <label for="name" class="form-label">
+                                Full Name <span class="form-required">*</span>
                             </label>
                             <input type="text" id="name" name="name" required
                                    placeholder="e.g., Chidi Okafor"
                                    class="form-input">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-semibold text-stone-700 mb-1">
-                                Email Address <span class="text-orange-500">*</span>
+                            <label for="email" class="form-label">
+                                Email Address <span class="form-required">*</span>
                             </label>
                             <input type="email" id="email" name="email" required
                                    placeholder="you@example.com"
                                    class="form-input">
                         </div>
                         <div class="sm:col-span-2">
-                            <label for="phone" class="block text-sm font-semibold text-stone-700 mb-1">
-                                Phone Number <span class="text-orange-500">*</span>
+                            <label for="phone" class="form-label">
+                                Phone Number <span class="form-required">*</span>
                             </label>
                             <input type="tel" id="phone" name="phone" required
                                    placeholder="+234 800 000 0000"
@@ -498,19 +255,15 @@
                         </div>
                     </div>
 
-                    <!-- STEP 2: Project Type -->
                     <h3 class="form-section-label">2. Project Requirements</h3>
 
                     <div class="mb-5">
-                        <label for="project_type" class="block text-sm font-semibold text-stone-700 mb-1">
-                            Type of Project <span class="text-orange-500">*</span>
+                        <label for="project_type" class="form-label">
+                            Type of Project <span class="form-required">*</span>
                         </label>
-
-                        <!-- Subtle helper row above the select -->
                         <p class="text-xs text-stone-400 mb-2">
                             Selecting a service unlocks additional pricing fields below.
                         </p>
-
                         <select id="project_type" name="projectType" required
                                 class="form-input"
                                 onchange="updateFormFields()">
@@ -523,33 +276,27 @@
                         </select>
                     </div>
 
-                    <!-- ── DYNAMIC FIELDS injected by scripts.js ── -->
-                    <!--
-                        scripts.js writes directly into #dynamic-fields.
-                        The border + background styling is in <style> above.
-                        Do NOT add placeholder content here — scripts.js handles it.
-                    -->
+                    <!-- Dynamic fields injected by scripts.js -->
                     <div id="dynamic-fields" class="mb-5 space-y-4"></div>
 
-                    <!-- STEP 3: Project Details (textarea — always visible) -->
                     <div class="mb-6">
-                        <label for="specificNeeds" class="block text-sm font-semibold text-stone-700 mb-1">
-                            Project Details <span class="text-orange-500">*</span>
-                            <span class="font-normal text-stone-400 ml-1">(describe your needs)</span>
+                        <label for="specificNeeds" class="form-label">
+                            Project Details <span class="form-required">*</span>
+                            <span class="form-label-hint">(describe your needs)</span>
                         </label>
                         <textarea id="specificNeeds" name="specificNeeds" rows="4" required
-                                  class="form-input resize-none"
+                                  class="form-input"
                                   placeholder="e.g., 5kVA solar for 3-bedroom house, 8 outdoor cameras for warehouse, automate lighting in 4 rooms…"></textarea>
                     </div>
 
                     <!-- Action Buttons -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <button type="submit" id="submit-button"
-                                class="primary-button w-full py-4 text-white text-base font-bold rounded-xl shadow-md">
+                                class="primary-button w-full py-4 text-base rounded-xl">
                             📥 Download Quote PDF
                         </button>
                         <button type="button" onclick="openChatWithContext()"
-                                class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-base font-bold rounded-xl shadow-md transition duration-200">
+                                class="chat-button w-full py-4 text-base rounded-xl">
                             💬 Discuss via Chat
                         </button>
                     </div>
@@ -559,7 +306,6 @@
                     </p>
 
                 </form>
-                <!-- ── END FORM ─────────────────────────────────── -->
 
             </div>
         </section>
@@ -570,24 +316,23 @@
          FOOTER
     ═══════════════════════════════════════════ -->
     <footer class="py-10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-stone-400">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
             <a href="#" onclick="document.getElementById('header').scrollIntoView({behavior:'smooth'}); return false;">
-                <div class="inline-block bg-white p-2 rounded-full mb-4 shadow">
-                    <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" class="h-12 w-auto object-contain"
+                <div class="footer-logo-wrap">
+                    <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo"
                          onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
                 </div>
             </a>
             <p class="text-stone-500 font-semibold mb-1">&copy; 2025 Justo Zeal. All Rights Reserved.</p>
             <p class="mt-2">
-                <a href="mailto:Justozeal1@gmail.com" class="hover:text-orange-400 transition">Justozeal1@gmail.com</a>
+                <a href="mailto:Justozeal1@gmail.com">Justozeal1@gmail.com</a>
                 &nbsp;·&nbsp;
-                <a href="tel:+2348114377822" class="hover:text-orange-400 transition">+234 811 437 7822</a>
+                <a href="tel:+2348114377822">+234 811 437 7822</a>
             </p>
             <div class="mt-3 flex justify-center gap-4">
-                <a href="https://www.instagram.com/JUSTZEAL" target="_blank"
-                   class="hover:text-orange-400 transition">Instagram @JUSTZEAL</a>
+                <a href="https://www.instagram.com/JUSTZEAL" target="_blank">Instagram @JUSTZEAL</a>
                 <span>·</span>
-                <a href="#" class="hover:text-orange-400 transition">Facebook</a>
+                <a href="#">Facebook</a>
             </div>
         </div>
     </footer>
@@ -599,7 +344,12 @@
     <script>
         const revealEls = document.querySelectorAll('.reveal');
         const observer  = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
         }, { threshold: 0.15 });
         revealEls.forEach(el => observer.observe(el));
     </script>
