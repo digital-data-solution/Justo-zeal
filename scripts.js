@@ -1,11 +1,112 @@
 // =============================================================================
-// JUSTO ZEAL - scripts.js
+// JUSTO ZEAL - COMPLETE ENHANCED QUOTE SYSTEM
+// Solar Auto-Configuration + CCTV + Smart Home + All Services
 // Pure frontend: PDF quote download + Tawk.to admin biodata push
-// No backend / SendGrid required
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// HIKVISION PRODUCT PRICING
+// SOLAR PRODUCT PRICING - NEW SECTION
+// ---------------------------------------------------------------------------
+const INVERTERS = {
+    '5kva IVEM': 504000,
+    '3kva IVEM': 372000,
+    '4kva IVEM': 408000,
+    '6kva IVEM': 540000,
+    '8kva IVEM': 936000,
+    '12kva IVEM': 1440000,
+    '20kva IVGM': 3420000,
+    '10kva IVPS': 996000,
+    '10kva IVPM': 1680000,
+};
+
+const BATTERIES = {
+    '5kwh 24v lithium': 1056000,
+    '5kwh 48v lithium': 1104000,
+    '7.2kwh lithium': 1320000,
+    '10kwh lithium': 1860000,
+    '15kwh lithium': 2640000,
+    '15kwh lithium Slim': 2760000,
+    '17.5kwh lithium': 3180000,
+    '25kwh lithium': 4560000,
+    '5kwh 48v AllinOne lithium': 1296000,
+};
+
+const PANELS = {
+    '210w Nevis': 54000,
+    '280w Felicity': 96000,
+    '320w Nevis': 96000,
+    '300w': 66000,
+    '310w': 69600,
+    'Lifefield 420w': 96000,
+    '480w Africell': 99600,
+    '400w Africell': 84000,
+    '450w Africell': 88800,
+    '550w Africell': 108000,
+    '600w Africell': 120000,
+    'Flames 600w': 138000,
+    'Felicity 580w Bifacial': 156000,
+    'Trina 605w': 150000,
+    'Sunpower 635w': 144000,
+    'Sunpower 635w Bifacial': 144000,
+    'Jinko 550w Bifacial': 138000,
+    'Jinko 590w Bifacial': 146400,
+    'Jinko 629w Bifacial': 153600,
+};
+
+// Smart system configurations - pre-optimized packages
+const SMART_SOLAR_CONFIGS = {
+    'One Bedroom (No AC)': {
+        inverter: '3kva IVEM',
+        battery: '5kwh 48v lithium',
+        panel: '450w Africell',
+        panelQty: 4,
+        accessories: 150000,
+        description: 'Basic lighting, fans, TV, small appliances'
+    },
+    'One Bedroom (With AC)': {
+        inverter: '5kva IVEM',
+        battery: '7.2kwh lithium',
+        panel: '550w Africell',
+        panelQty: 6,
+        accessories: 200000,
+        description: 'Full home + 1 AC unit'
+    },
+    'Two Bedroom (No AC)': {
+        inverter: '5kva IVEM',
+        battery: '10kwh lithium',
+        panel: '550w Africell',
+        panelQty: 8,
+        accessories: 250000,
+        description: 'All basic appliances, no AC'
+    },
+    'Two Bedroom (With AC)': {
+        inverter: '8kva IVEM',
+        battery: '15kwh lithium',
+        panel: '600w Africell',
+        panelQty: 10,
+        accessories: 300000,
+        description: 'Full home + 2 AC units'
+    },
+    'Three Bedroom (No AC)': {
+        inverter: '8kva IVEM',
+        battery: '15kwh lithium Slim',
+        panel: 'Jinko 590w Bifacial',
+        panelQty: 10,
+        accessories: 350000,
+        description: 'Large home, all appliances except AC'
+    },
+    'Three Bedroom (With AC)': {
+        inverter: '10kva IVPS',
+        battery: '17.5kwh lithium',
+        panel: 'Jinko 629w Bifacial',
+        panelQty: 12,
+        accessories: 400000,
+        description: 'Full home + 3 AC units, premium system'
+    }
+};
+
+// ---------------------------------------------------------------------------
+// HIKVISION PRODUCT PRICING - EXISTING SECTION
 // ---------------------------------------------------------------------------
 const HIKVISION_CAMERAS = {
     'HIKVISION 2MP DOME (DS-2CE76D0T-EXIPF)':                                   12075,
@@ -64,7 +165,6 @@ function toggleLoadingOverlay(show) {
 }
 
 function showStatus(msg, type) {
-    // type: 'success' | 'error' | 'info'
     const el = document.getElementById('status-message');
     if (!el) return;
     el.className = 'p-4 mb-6 rounded-xl font-semibold text-center';
@@ -100,7 +200,81 @@ window.closeMobileMenu = function () {
 };
 
 // ---------------------------------------------------------------------------
-// DYNAMIC FORM FIELDS — CCTV now has full Hikvision dropdowns
+// SOLAR AUTO-CONFIGURATION - NEW FUNCTION
+// ---------------------------------------------------------------------------
+window.onSolarPropertyTypeChange = function() {
+    const propertyType = document.getElementById('solar_property_type')?.value;
+    
+    if (!propertyType || propertyType === 'Custom') {
+        document.getElementById('solar-auto-config')?.classList.add('hidden');
+        document.getElementById('solar-manual-config')?.classList.remove('hidden');
+        updateLiveTotal();
+        return;
+    }
+    
+    const config = SMART_SOLAR_CONFIGS[propertyType];
+    if (!config) {
+        updateLiveTotal();
+        return;
+    }
+    
+    // Auto-populate hidden fields
+    document.getElementById('solar_inverter').value = config.inverter;
+    document.getElementById('solar_battery').value = config.battery;
+    document.getElementById('solar_panel').value = config.panel;
+    document.getElementById('solar_panel_qty').value = config.panelQty;
+    document.getElementById('solar_accessories').value = config.accessories;
+    
+    // Calculate material cost
+    const materialCost = INVERTERS[config.inverter] + 
+                        BATTERIES[config.battery] + 
+                        (PANELS[config.panel] * config.panelQty) + 
+                        config.accessories;
+    const serviceCharge = materialCost * 0.15;
+    const total = materialCost + serviceCharge;
+    
+    // Show summary
+    const summaryEl = document.getElementById('solar-auto-summary');
+    if (summaryEl) {
+        summaryEl.innerHTML = `
+            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <h4 class="font-bold text-orange-900 mb-2">✨ Auto-Configured System</h4>
+                <p class="text-sm text-orange-800 mb-3">${config.description}</p>
+                <div class="grid grid-cols-2 gap-2 text-sm text-orange-900 mb-3">
+                    <div>• <strong>Inverter:</strong> ${config.inverter}</div>
+                    <div class="text-right">${fmt(INVERTERS[config.inverter])}</div>
+                    <div>• <strong>Battery:</strong> ${config.battery}</div>
+                    <div class="text-right">${fmt(BATTERIES[config.battery])}</div>
+                    <div>• <strong>Panels:</strong> ${config.panelQty}× ${config.panel}</div>
+                    <div class="text-right">${fmt(PANELS[config.panel] * config.panelQty)}</div>
+                    <div>• <strong>Installation:</strong></div>
+                    <div class="text-right">${fmt(config.accessories)}</div>
+                </div>
+                <div class="border-t border-orange-300 pt-2 mt-2">
+                    <div class="flex justify-between text-sm">
+                        <span>Material Subtotal:</span>
+                        <span class="font-semibold">${fmt(materialCost)}</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span>Service Charge (15%):</span>
+                        <span class="font-semibold">${fmt(serviceCharge)}</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold text-orange-700 mt-1">
+                        <span>Total Quote:</span>
+                        <span>${fmt(total)}</span>
+                    </div>
+                </div>
+            </div>`;
+    }
+    
+    document.getElementById('solar-auto-config')?.classList.remove('hidden');
+    document.getElementById('solar-manual-config')?.classList.add('hidden');
+    
+    updateLiveTotal();
+};
+
+// ---------------------------------------------------------------------------
+// DYNAMIC FORM FIELDS — ENHANCED WITH FULL SOLAR INTEGRATION
 // ---------------------------------------------------------------------------
 window.updateFormFields = function () {
     const type = document.getElementById('project_type')?.value;
@@ -109,22 +283,103 @@ window.updateFormFields = function () {
     container.innerHTML = '';
 
     if (type === 'Solar/Inverter') {
+        const propertyOptions = Object.keys(SMART_SOLAR_CONFIGS).map(prop => 
+            `<option value="${prop}">${prop}</option>`
+        ).join('');
+        
+        const inverterOptions = Object.keys(INVERTERS).map(inv => 
+            `<option value="${inv}">${inv} — ${fmt(INVERTERS[inv])}</option>`
+        ).join('');
+        
+        const batteryOptions = Object.keys(BATTERIES).map(bat => 
+            `<option value="${bat}">${bat} — ${fmt(BATTERIES[bat])}</option>`
+        ).join('');
+        
+        const panelOptions = Object.keys(PANELS).map(panel => 
+            `<option value="${panel}">${panel} — ${fmt(PANELS[panel])}/panel</option>`
+        ).join('');
+
         container.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800 mb-4">
+            💡 <strong>Smart Setup:</strong> Select your property type for instant configuration, 
+            or choose "Custom" to manually select components.
+          </div>
+
+          <div class="mb-5">
+            <label for="solar_property_type" class="block text-sm font-semibold text-gray-700 mb-1">
+              Property Type <span class="text-red-500">*</span>
+              <span class="block font-normal text-gray-500 text-xs">Auto-configures the perfect system for you</span>
+            </label>
+            <select id="solar_property_type" name="Property Type"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                    onchange="onSolarPropertyTypeChange()">
+              <option value="">— Select Property Type —</option>
+              ${propertyOptions}
+              <option value="Custom">🔧 Custom Configuration</option>
+            </select>
+          </div>
+
+          <div id="solar-auto-config" class="mb-5 hidden">
+            <div id="solar-auto-summary"></div>
+          </div>
+
+          <div id="solar-manual-config" class="space-y-4 hidden">
+            <h4 class="text-sm font-bold text-gray-700 mb-3">Custom System Components</h4>
+            
             <div>
-              <label for="kva" class="block text-sm font-medium text-gray-700 mb-1">kVA Required</label>
-              <input type="number" id="kva" name="kVA Required" min="0" step="0.5"
-                     placeholder="e.g., 5" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <label for="solar_inverter" class="block text-sm font-semibold text-gray-700 mb-1">
+                ⚡ Inverter Model <span class="text-red-500">*</span>
+              </label>
+              <select id="solar_inverter" name="Inverter Model"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                      onchange="updateLiveTotal()">
+                <option value="">— Choose Inverter —</option>
+                ${inverterOptions}
+              </select>
             </div>
+
             <div>
-              <label for="batteries" class="block text-sm font-medium text-gray-700 mb-1">Number of Batteries</label>
-              <input type="number" id="batteries" name="Number of Batteries" min="0"
-                     placeholder="e.g., 4" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <label for="solar_battery" class="block text-sm font-semibold text-gray-700 mb-1">
+                🔋 Battery Type <span class="text-red-500">*</span>
+              </label>
+              <select id="solar_battery" name="Battery Type"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                      onchange="updateLiveTotal()">
+                <option value="">— Choose Battery —</option>
+                ${batteryOptions}
+              </select>
             </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="solar_panel" class="block text-sm font-semibold text-gray-700 mb-1">
+                  ☀️ Solar Panel Model <span class="text-red-500">*</span>
+                </label>
+                <select id="solar_panel" name="Solar Panel Model"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                        onchange="updateLiveTotal()">
+                  <option value="">— Choose Panel —</option>
+                  ${panelOptions}
+                </select>
+              </div>
+              <div>
+                <label for="solar_panel_qty" class="block text-sm font-semibold text-gray-700 mb-1">
+                  Panel Quantity <span class="text-red-500">*</span>
+                </label>
+                <input type="number" id="solar_panel_qty" name="Panel Quantity" min="1" value="4"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                       oninput="updateLiveTotal()">
+              </div>
+            </div>
+
             <div>
-              <label for="panels" class="block text-sm font-medium text-gray-700 mb-1">Solar Panels (Optional)</label>
-              <input type="number" id="panels" name="Number of Solar Panels" min="0"
-                     placeholder="e.g., 8" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <label for="solar_accessories" class="block text-sm font-semibold text-gray-700 mb-1">
+                🔧 Accessories & Installation Cost
+                <span class="block font-normal text-gray-500 text-xs">Cables, mounting, circuit breakers, installation labor</span>
+              </label>
+              <input type="number" id="solar_accessories" name="Accessories Cost" min="0" value="150000"
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                     oninput="updateLiveTotal()">
             </div>
           </div>`;
 
@@ -144,8 +399,6 @@ window.updateFormFields = function () {
           </div>`;
 
     } else if (type === 'CCTV/Security') {
-
-        // ── Camera options — grouped by technology type for easy reading ──
         const cameraOptions = `
           <optgroup label="📷 Analogue Cameras (Wired, cost-effective)">
             <option value="HIKVISION 2MP DOME (DS-2CE76D0T-EXIPF)">2MP Dome — Indoor/Outdoor, Basic, Wide Angle · ${fmt(12075)}</option>
@@ -163,7 +416,6 @@ window.updateFormFields = function () {
             <option value="HIKVISION 4MP DOME SMART HYBRID LIGHT CAMERA">4MP Dome Smart Hybrid — Ultra Sharp, Colour Night Vision · ${fmt(80500)}</option>
           </optgroup>`;
 
-        // ── DVR options — grouped by channel size ──
         const dvrOptions = `
           <optgroup label="📹 4-Channel DVR (Up to 4 cameras)">
             <option value="4CH DVR 1080P">4-Channel 1080P DVR — Standard HD Recording · ${fmt(41400)}</option>
@@ -183,7 +435,6 @@ window.updateFormFields = function () {
             <option value="32CH DVR 3K/5MP (iDS-7232HQHI-M2/S)">32-Channel 3K/5MP DVR — Large Site, High Resolution · ${fmt(377200)}</option>
           </optgroup>`;
 
-        // ── NVR options — grouped by channel size ──
         const nvrOptions = `
           <optgroup label="🖥️ 8-Channel NVR (Up to 8 IP cameras)">
             <option value="8CH NVR 1 SATA (DS-7108NI-Q1/8P/M)">8-Channel NVR with PoE — Powers cameras via cable, 1 Hard Drive Bay · ${fmt(129950)}</option>
@@ -196,14 +447,12 @@ window.updateFormFields = function () {
             <option value="32CH NVR ACUSENSE POE (DS-7632NXI-K2/16P)">32-Channel AcuSense NVR with PoE — Smart AI, Powers cameras via cable · ${fmt(495075)}</option>
           </optgroup>`;
 
-        // ── PTZ options ──
         const ptzOptions = `
           <optgroup label="🔄 PTZ Cameras (Remote pan, tilt & zoom control)">
             <option value="2MP HD PTZ (DS-2DE4225TI-D)">2MP HD PTZ — 25× Optical Zoom, IR Night Vision, Remote Control · ${fmt(391000)}</option>
             <option value="2MP TANDEMVU COLOURVU PTZ (DS-2SE4C225MWG-E)">2MP TandemVu ColourVu PTZ — Dual Lens, Full Colour + Zoom Simultaneously · ${fmt(460000)}</option>
           </optgroup>`;
 
-        // ── Power Supply options ──
         const psOptions = `
           <optgroup label="⚡ Camera Power Supplies">
             <option value="HIKVISION 4-WAY POWER SUPPLY">4-Way Power Supply — Powers up to 4 cameras from one unit · ${fmt(10925)}</option>
@@ -212,13 +461,11 @@ window.updateFormFields = function () {
           </optgroup>`;
 
         container.innerHTML = `
-          <!-- Helper tip -->
           <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
             💡 <strong>Not sure what to pick?</strong> Dome cameras suit indoor/ceiling use. Bullet cameras are best outdoors. 
             DVR = for analogue cameras. NVR = for IP/network cameras. Use the chat button if you need help choosing.
           </div>
 
-          <!-- Camera rows -->
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">
               📷 Camera Model &amp; Quantity
@@ -246,7 +493,6 @@ window.updateFormFields = function () {
             </button>
           </div>
 
-          <!-- Recorder selection -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="dvr_model" class="block text-sm font-semibold text-gray-700 mb-1">
@@ -274,7 +520,6 @@ window.updateFormFields = function () {
             </div>
           </div>
 
-          <!-- PTZ & Power Supply -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="ptz_model" class="block text-sm font-semibold text-gray-700 mb-1">
@@ -302,7 +547,6 @@ window.updateFormFields = function () {
             </div>
           </div>
 
-          <!-- Alarm add-on -->
           <div>
             <label for="security_type" class="block text-sm font-semibold text-gray-700 mb-1">
               🚨 Alarm / Integrated Security (Optional)
@@ -333,7 +577,6 @@ window.updateFormFields = function () {
           </p>`;
     }
 
-    // Recalculate live total whenever a field changes
     container.querySelectorAll('input, select').forEach(el => {
         el.addEventListener('change', updateLiveTotal);
         el.addEventListener('input', updateLiveTotal);
@@ -408,7 +651,7 @@ function updateLiveTotal() {
 }
 
 // ---------------------------------------------------------------------------
-// CORE CALCULATION — returns { subtotal, lineItems }
+// CORE CALCULATION — ENHANCED WITH SOLAR PRICING + 15% SERVICE CHARGE
 // ---------------------------------------------------------------------------
 function calculateLineItems() {
     const projectType = document.getElementById('project_type')?.value || '';
@@ -416,16 +659,51 @@ function calculateLineItems() {
     let lineItems = [];
 
     if (projectType === 'Solar/Inverter') {
-        const kva      = parseFloat(document.querySelector('[name="kVA Required"]')?.value) || 0;
-        const batteries= parseInt(document.querySelector('[name="Number of Batteries"]')?.value) || 0;
-        const panels   = parseInt(document.querySelector('[name="Number of Solar Panels"]')?.value) || 0;
-        const kvaCost  = kva * 350000;
-        const batCost  = batteries * 200000;
-        const panCost  = panels * 100000;
-        subtotal = kvaCost + batCost + panCost;
-        if (kvaCost  > 0) lineItems.push({ desc: `Solar System (${kva} kVA)`,          qty: kva,       price: 350000, total: kvaCost });
-        if (batCost  > 0) lineItems.push({ desc: `Batteries (${batteries} units)`,      qty: batteries, price: 200000, total: batCost });
-        if (panCost  > 0) lineItems.push({ desc: `Solar Panels (${panels} units)`,      qty: panels,    price: 100000, total: panCost });
+        // Get selected components (works for both auto and manual mode)
+        const inverter = document.getElementById('solar_inverter')?.value || '';
+        const battery = document.getElementById('solar_battery')?.value || '';
+        const panel = document.getElementById('solar_panel')?.value || '';
+        const panelQty = parseInt(document.getElementById('solar_panel_qty')?.value) || 0;
+        const accessories = parseInt(document.getElementById('solar_accessories')?.value) || 0;
+        
+        let materialCost = 0;
+        
+        // Inverter
+        if (inverter && INVERTERS[inverter]) {
+            const price = INVERTERS[inverter];
+            materialCost += price;
+            lineItems.push({ desc: `Inverter: ${inverter}`, qty: 1, price: price, total: price });
+        }
+        
+        // Battery
+        if (battery && BATTERIES[battery]) {
+            const price = BATTERIES[battery];
+            materialCost += price;
+            lineItems.push({ desc: `Battery: ${battery}`, qty: 1, price: price, total: price });
+        }
+        
+        // Solar Panels
+        if (panel && PANELS[panel] && panelQty > 0) {
+            const price = PANELS[panel];
+            const total = price * panelQty;
+            materialCost += total;
+            lineItems.push({ desc: `Solar Panels: ${panelQty}× ${panel}`, qty: panelQty, price: price, total: total });
+        }
+        
+        // Accessories
+        if (accessories > 0) {
+            materialCost += accessories;
+            lineItems.push({ desc: 'Installation & Accessories', qty: 1, price: accessories, total: accessories });
+        }
+        
+        // Calculate 15% service charge
+        const serviceCharge = materialCost * 0.15;
+        
+        if (serviceCharge > 0) {
+            lineItems.push({ desc: 'Service Charge (15%)', qty: 1, price: serviceCharge, total: serviceCharge });
+        }
+        
+        subtotal = materialCost + serviceCharge;
 
     } else if (projectType === 'Smart Home') {
         const rooms   = parseInt(document.querySelector('[name="Rooms for Automation"]')?.value) || 0;
@@ -506,7 +784,6 @@ function calculateLineItems() {
 function pushBiodataToTawk(name, email, phone, projectType, invoiceNo, total) {
     if (typeof Tawk_API === 'undefined') return;
 
-    // setAttributes makes the data appear in the visitor panel for the admin
     try {
         Tawk_API.setAttributes({
             name:        name        || 'N/A',
@@ -522,7 +799,6 @@ function pushBiodataToTawk(name, email, phone, projectType, invoiceNo, total) {
         console.warn('Tawk setAttributes failed:', e);
     }
 
-    // addEvent logs a timeline event the admin can read in the conversation
     try {
         Tawk_API.addEvent('Quote Generated', {
             invoiceNo:   invoiceNo,
@@ -637,7 +913,6 @@ function generateAndDownloadPDF(data) {
         }
         rowBg = !rowBg;
         doc.setTextColor(...dark);
-        // Wrap long description
         const descLines = doc.splitTextToSize(item.desc, 95);
         doc.text(descLines, 13, y + 4);
         const rowH = Math.max(7, descLines.length * 4.5);
@@ -649,7 +924,6 @@ function generateAndDownloadPDF(data) {
 
     // ── Totals block ──────────────────────────────────────────────────────────
     y += 6;
-    // Separator line
     doc.setDrawColor(...orange);
     doc.setLineWidth(0.5);
     doc.line(10, y, pageW - 10, y);
@@ -665,7 +939,7 @@ function generateAndDownloadPDF(data) {
     doc.setFont('helvetica', 'italic');
     doc.setTextColor(...gray);
     y += 5;
-    doc.text('(No VAT applied — prices are final estimates subject to site audit)', pageW - 12, y, { align: 'right' });
+    doc.text('(Prices include 15% service charge where applicable — subject to site audit)', pageW - 12, y, { align: 'right' });
 
     // ── Project description ──────────────────────────────────────────────────
     if (data.specificNeeds) {
@@ -721,7 +995,7 @@ window.handleLeadSubmission = function (event) {
     const { subtotal, lineItems } = calculateLineItems();
 
     if (subtotal <= 0) {
-        showStatus('❌ Could not calculate a total. Please fill in the project details (kVA, cameras, rooms, etc.).', 'error');
+        showStatus('❌ Could not calculate a total. Please fill in the project details.', 'error');
         return;
     }
 
@@ -731,7 +1005,6 @@ window.handleLeadSubmission = function (event) {
     toggleLoadingOverlay(true);
     if (btn) { btn.disabled = true; btn.textContent = 'Generating…'; }
 
-    // Short timeout to allow the overlay to render
     setTimeout(() => {
         try {
             generateAndDownloadPDF({
@@ -739,7 +1012,6 @@ window.handleLeadSubmission = function (event) {
                 invoiceNumber, subtotal, lineItems
             });
 
-            // Push to Tawk.to
             pushBiodataToTawk(name, email, phone, projectType, invoiceNumber, subtotal);
 
             showStatus(
@@ -748,7 +1020,6 @@ window.handleLeadSubmission = function (event) {
                 'success'
             );
 
-            // Reset form
             document.getElementById('quote-form-element')?.reset();
             window.updateFormFields();
 
@@ -774,7 +1045,6 @@ window.openChatWithContext = function () {
 
     const { subtotal } = calculateLineItems();
 
-    // Always push biodata even before PDF is generated
     if (typeof Tawk_API !== 'undefined') {
         try {
             Tawk_API.setAttributes({
@@ -790,9 +1060,7 @@ window.openChatWithContext = function () {
 
         Tawk_API.maximize();
 
-        // Pre-fill the chat input with the user's context
         setTimeout(() => {
-            // Build a human-readable opening message
             let msg = `Hi! I'd like to discuss a project with Justo Zeal.\n\n`;
             msg += `👤 Name: ${name || 'Not provided'}\n`;
             msg += `📧 Email: ${email || 'Not provided'}\n`;
@@ -811,7 +1079,6 @@ window.openChatWithContext = function () {
         }, 800);
 
     } else {
-        // Tawk not loaded yet — retry once
         showStatus('⌛ Chat is loading, please wait a moment…', 'info');
         setTimeout(window.openChatWithContext, 2500);
     }
@@ -821,23 +1088,17 @@ window.openChatWithContext = function () {
 // DOMContentLoaded bootstrap
 // ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    // Hide loading overlay
     toggleLoadingOverlay(false);
-
-    // Initialise dynamic fields
     window.updateFormFields();
 
-    // Update submit button label to reflect no-email flow
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) submitBtn.innerHTML = '📥 Download Quote PDF';
 
-    // Bind specificNeeds to recalc for 'Multiple' type
     const specificNeedsEl = document.getElementById('specificNeeds');
     if (specificNeedsEl) {
         specificNeedsEl.addEventListener('input', updateLiveTotal);
     }
 
-    // Tawk.to — fire welcome event when the widget is ready
     if (typeof Tawk_API !== 'undefined') {
         Tawk_API.onLoad = function () {
             try {
