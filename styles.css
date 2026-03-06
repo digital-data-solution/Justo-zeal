@@ -60,10 +60,10 @@
     --shadow-orange-lg: 0 8px 28px rgba(249,115,22,0.35);
 
     /* Borders */
-    --radius-sm:  0.375rem;   /* 6px  */
-    --radius-md:  0.625rem;   /* 10px */
-    --radius-lg:  0.875rem;   /* 14px */
-    --radius-xl:  1.25rem;    /* 20px */
+    --radius-sm:  0.375rem;
+    --radius-md:  0.625rem;
+    --radius-lg:  0.875rem;
+    --radius-xl:  1.25rem;
     --radius-full: 9999px;
 
     /* Transitions */
@@ -118,7 +118,6 @@ input, select, textarea, button {
     font-size: inherit;
 }
 
-/* Typography base */
 h1, h2, h3, h4, h5, h6,
 .brand-text {
     font-family: var(--font-display);
@@ -136,7 +135,7 @@ p {
    3. LOADING OVERLAY
    --------------------------------------------------------------------------- */
 #loading-overlay {
-    display: none;           /* toggled to flex by scripts.js */
+    display: none;
     position: fixed;
     inset: 0;
     background: rgba(249, 115, 22, 0.10);
@@ -182,7 +181,6 @@ p {
     justify-content: space-between;
 }
 
-/* Logo */
 .logo-img {
     height: 2.5rem;
     width: auto;
@@ -196,7 +194,6 @@ p {
     color: var(--color-primary);
 }
 
-/* Desktop nav links */
 .nav-link {
     font-size: 0.875rem;
     font-weight: 500;
@@ -208,7 +205,6 @@ p {
     color: var(--color-primary);
 }
 
-/* Mobile menu */
 .mobile-menu-slide {
     max-height: 0;
     overflow: hidden;
@@ -283,7 +279,6 @@ p {
     box-shadow: none;
 }
 
-/* Secondary / ghost button */
 .secondary-button {
     display: inline-flex;
     align-items: center;
@@ -301,12 +296,33 @@ p {
     background: var(--color-primary-xlight);
 }
 
-/* Chat / green button */
+/* WhatsApp CTA button (replaces old .chat-button in the form) */
+.wa-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #25D366;
+    color: var(--color-white);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.wa-cta-button:hover {
+    background: #1ebe5d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+}
+
+/* Keep .chat-button alias for any legacy references */
 .chat-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #059669;
+    background: #25D366;
     color: var(--color-white);
     font-weight: 700;
     border: none;
@@ -317,9 +333,9 @@ p {
 }
 
 .chat-button:hover {
-    background: #047857;
+    background: #1ebe5d;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(5,150,105,0.3);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.3);
 }
 
 
@@ -336,7 +352,6 @@ p {
     overflow: hidden;
 }
 
-/* Decorative background glows */
 .hero-glow-top {
     position: absolute;
     top: -5rem;
@@ -478,7 +493,6 @@ p {
     color: var(--color-primary-dark);
 }
 
-/* Value prop card (no image) */
 .value-card {
     background: var(--color-surface);
     border-radius: var(--radius-lg);
@@ -567,7 +581,6 @@ p {
     }
 }
 
-/* Form section headings */
 .form-section-label {
     font-family: var(--font-display);
     font-size: 1.1875rem;
@@ -585,7 +598,6 @@ p {
     margin-top: 0;
 }
 
-/* Field label */
 .form-label {
     display: block;
     font-size: 0.875rem;
@@ -604,7 +616,6 @@ p {
     color: var(--color-primary);
 }
 
-/* Core input / select / textarea */
 .form-input {
     display: block;
     width: 100%;
@@ -637,7 +648,6 @@ p {
     cursor: not-allowed;
 }
 
-/* Select arrow */
 select.form-input {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -653,7 +663,7 @@ textarea.form-input {
 
 
 /* ---------------------------------------------------------------------------
-   11. DYNAMIC FIELDS (injected by scripts.js)
+   11. DYNAMIC FIELDS
    --------------------------------------------------------------------------- */
 #dynamic-fields {
     background: #fef7f0;
@@ -664,7 +674,6 @@ textarea.form-input {
     transition: min-height 0.3s ease;
 }
 
-/* Empty-state hint when no service is selected */
 #dynamic-fields:empty::before {
     content: "↑  Select a service above to see project-specific options";
     display: block;
@@ -674,7 +683,6 @@ textarea.form-input {
     padding: 1.25rem 0;
 }
 
-/* All inputs / selects injected by scripts.js inherit form styles */
 #dynamic-fields select,
 #dynamic-fields input[type="text"],
 #dynamic-fields input[type="number"] {
@@ -708,7 +716,6 @@ textarea.form-input {
     outline: none;
 }
 
-/* Camera row — qty input stays narrow */
 #dynamic-fields .camera-row {
     display: flex;
     gap: 0.5rem;
@@ -722,7 +729,6 @@ textarea.form-input {
     flex-shrink: 0;
 }
 
-/* Helper tip box inside dynamic fields */
 #dynamic-fields .tip-box {
     background: #eff6ff;
     border: 1px solid #bfdbfe;
@@ -733,7 +739,6 @@ textarea.form-input {
     line-height: 1.5;
 }
 
-/* Live total chip */
 #live-total {
     margin-top: 1rem;
     padding: 0.875rem 1.25rem;
@@ -828,8 +833,6 @@ footer .footer-logo-wrap img {
 /* ---------------------------------------------------------------------------
    15. UTILITY & ACCESSIBILITY
    --------------------------------------------------------------------------- */
-
-/* Visually hidden (screen-reader only) */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -842,27 +845,23 @@ footer .footer-logo-wrap img {
     border: 0;
 }
 
-/* Focus ring for keyboard nav */
 :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
 
-/* Smooth image overflow for cards */
 .img-cover {
     width: 100%;
     height: 12rem;
     object-fit: cover;
 }
 
-/* Divider line */
 .divider {
     border: none;
     border-top: 1px solid var(--color-stone-100);
     margin: 1.5rem 0;
 }
 
-/* Orange text helper */
 .text-orange { color: var(--color-primary); }
 .text-orange-dark { color: var(--color-primary-dark); }
 
@@ -872,6 +871,7 @@ footer .footer-logo-wrap img {
    --------------------------------------------------------------------------- */
 @media (max-width: 768px) {
     .primary-button,
+    .wa-cta-button,
     .chat-button {
         width: 100%;
         padding: 1rem;
@@ -915,5 +915,260 @@ footer .footer-logo-wrap img {
     #dynamic-fields .camera-row input[type="number"] {
         width: 100%;
         text-align: left;
+    }
+}
+
+
+/* =============================================================================
+   WHATSAPP FLOATING WIDGET
+   Sits above Tawk.to (bottom: 90px) · auto-opens after 8s · once per session
+   ============================================================================= */
+
+#wa-widget {
+    position: fixed;
+    bottom: 90px; /* clears Tawk.to button */
+    right: 24px;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    font-family: var(--font-body);
+}
+
+/* ── Popup card ── */
+#wa-popup {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+    width: 290px;
+    overflow: hidden;
+    transform: scale(0.85) translateY(12px);
+    transform-origin: bottom right;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease;
+}
+
+#wa-popup.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Popup header — uses Justo Zeal dark brand */
+.wa-popup-header {
+    background: linear-gradient(135deg, #1c1917 0%, #431407 100%);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wa-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    border: 2px solid rgba(255,255,255,0.25);
+}
+
+.wa-popup-header-text h4 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 2px;
+}
+
+.wa-popup-header-text p {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wa-status-dot {
+    width: 7px;
+    height: 7px;
+    background: #25D366;
+    border-radius: 50%;
+    display: inline-block;
+    animation: wa-pulse-dot 2s infinite;
+}
+
+@keyframes wa-pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
+}
+
+/* Popup body */
+.wa-popup-body {
+    padding: 16px 18px;
+    background: #f0f0f0;
+}
+
+.wa-bubble {
+    background: #fff;
+    border-radius: 0 12px 12px 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #333;
+    line-height: 1.5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    position: relative;
+    max-width: 88%;
+}
+
+.wa-bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -6px;
+    border: 6px solid transparent;
+    border-right-color: #fff;
+    border-top-color: #fff;
+}
+
+.wa-bubble-time {
+    font-size: 10px;
+    color: #aaa;
+    text-align: right;
+    margin-top: 4px;
+}
+
+/* CTA button area */
+.wa-popup-cta {
+    padding: 14px 18px;
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.wa-popup-cta a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 50px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.wa-popup-cta a:hover {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+}
+
+/* ── FAB button ── */
+#wa-fab {
+    width: 58px;
+    height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    border: none;
+    outline: none;
+}
+
+#wa-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.55), 0 2px 10px rgba(0,0,0,0.2);
+}
+
+#wa-fab:active { transform: scale(0.96); }
+
+/* Ripple ring */
+#wa-fab::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(37,211,102,0.4);
+    animation: wa-ring 2.5s ease-out infinite;
+}
+
+@keyframes wa-ring {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(1.5); opacity: 0;   }
+}
+
+/* Notification badge */
+#wa-badge {
+    position: absolute;
+    top: -2px; right: -2px;
+    width: 18px; height: 18px;
+    background: #ff3b30;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    animation: wa-badge-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) 1.5s both;
+}
+
+@keyframes wa-badge-pop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+}
+
+/* Icon swap animation */
+#wa-fab .icon-wa    { transition: opacity 0.2s, transform 0.2s; }
+#wa-fab .icon-close { position: absolute; opacity: 0; transform: rotate(-90deg) scale(0.5); transition: opacity 0.2s, transform 0.2s; }
+#wa-fab.active .icon-wa    { opacity: 0; transform: rotate(90deg) scale(0.5); }
+#wa-fab.active .icon-close { opacity: 1; transform: rotate(0deg) scale(1); }
+
+/* Tooltip */
+#wa-tooltip {
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    position: absolute;
+    right: 68px;
+    bottom: 50%;
+    opacity: 0;
+    transform: translateY(50%) translateX(8px);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+#wa-widget:hover #wa-tooltip:not(.hidden) {
+    opacity: 1;
+    transform: translateY(50%) translateX(0);
+}
+
+#wa-tooltip.hidden { display: none; }
+
+/* Mobile: tuck widget in a bit */
+@media (max-width: 480px) {
+    #wa-widget {
+        bottom: 80px;
+        right: 16px;
+    }
+
+    #wa-popup {
+        width: 270px;
     }
 }
