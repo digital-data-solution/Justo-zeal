@@ -56,6 +56,7 @@
 
             <nav class="hidden md:flex items-center gap-6">
                 <a href="#services" class="nav-link">Our Solutions</a>
+                <a href="#price-list" class="nav-link">Price List</a>
                 <a href="#process"  class="nav-link">How It Works</a>
                 <a href="#quote-form-section" class="primary-button px-5 py-2.5 text-sm rounded-lg">
                     Get a Quote
@@ -76,6 +77,7 @@
         <div id="mobile-menu" class="mobile-menu-slide md:hidden">
             <div class="flex flex-col p-4 gap-2">
                 <a href="#services" onclick="closeMobileMenu()" class="mobile-nav-link">Our Solutions</a>
+                <a href="#price-list" onclick="closeMobileMenu()" class="mobile-nav-link">Price List</a>
                 <a href="#process"  onclick="closeMobileMenu()" class="mobile-nav-link">How It Works</a>
                 <a href="#quote-form-section" onclick="closeMobileMenu()"
                    class="primary-button mt-2 py-3 text-sm rounded-xl text-center">Get a Quote</a>
@@ -179,8 +181,142 @@
         </section>
 
         <!-- ═══════════════════════════════════════════
-             HOW IT WORKS
+             PRICE LIST
         ═══════════════════════════════════════════ -->
+        <section id="price-list" class="py-16 sm:py-24 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center mb-10">
+                    <p class="section-eyebrow">Transparent Pricing</p>
+                    <h2 class="section-title" style="margin-bottom:0.75rem;">Our Product Price List</h2>
+                    <p class="text-stone-500 text-base max-w-2xl mx-auto">
+                        All prices shown are material costs. A 15% service charge applies on solar installations.
+                        Final pricing confirmed after free site inspection.
+                    </p>
+                </div>
+
+                <!-- Tab Buttons -->
+                <div class="pricelist-tabs" id="pricelist-tabs">
+                    <button class="pricelist-tab active" onclick="switchTab('solar')">☀️ Solar & Inverters</button>
+                    <button class="pricelist-tab" onclick="switchTab('cctv')">📷 CCTV & Security</button>
+                    <button class="pricelist-tab" onclick="switchTab('packages')">🏠 Solar Packages</button>
+                </div>
+
+                <!-- ── SOLAR TAB ── -->
+                <div id="tab-solar" class="pricelist-panel">
+
+                    <div class="pricelist-grid">
+
+                        <!-- Inverters -->
+                        <div class="pricelist-card reveal">
+                            <div class="pricelist-card__header">
+                                <span>⚡</span> Inverters
+                            </div>
+                            <table class="pricelist-table">
+                                <thead>
+                                    <tr><th>Model</th><th>Price</th></tr>
+                                </thead>
+                                <tbody id="inverter-rows"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Batteries -->
+                        <div class="pricelist-card reveal" style="transition-delay:0.1s">
+                            <div class="pricelist-card__header">
+                                <span>🔋</span> Lithium Batteries
+                            </div>
+                            <table class="pricelist-table">
+                                <thead>
+                                    <tr><th>Model</th><th>Price</th></tr>
+                                </thead>
+                                <tbody id="battery-rows"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Solar Panels -->
+                        <div class="pricelist-card reveal" style="transition-delay:0.2s">
+                            <div class="pricelist-card__header">
+                                <span>☀️</span> Solar Panels
+                            </div>
+                            <table class="pricelist-table">
+                                <thead>
+                                    <tr><th>Model</th><th>Per Panel</th></tr>
+                                </thead>
+                                <tbody id="panel-rows"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ── CCTV TAB ── -->
+                <div id="tab-cctv" class="pricelist-panel hidden">
+
+                    <div class="pricelist-grid">
+
+                        <!-- Cameras -->
+                        <div class="pricelist-card reveal">
+                            <div class="pricelist-card__header">
+                                <span>📷</span> Hikvision Cameras
+                            </div>
+                            <table class="pricelist-table">
+                                <thead>
+                                    <tr><th>Model</th><th>Price</th></tr>
+                                </thead>
+                                <tbody id="camera-price-rows"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- DVRs & NVRs -->
+                        <div class="pricelist-card reveal" style="transition-delay:0.1s">
+                            <div class="pricelist-card__header">
+                                <span>📹</span> DVRs & NVRs
+                            </div>
+                            <table class="pricelist-table">
+                                <thead>
+                                    <tr><th>Model</th><th>Price</th></tr>
+                                </thead>
+                                <tbody id="dvrnvr-rows"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- PTZ & Accessories -->
+                        <div class="pricelist-card reveal" style="transition-delay:0.2s">
+                            <div class="pricelist-card__header">
+                                <span>🔄</span> PTZ & Power Supplies
+                            </div>
+                            <table class="pricelist-table">
+                                <thead>
+                                    <tr><th>Model</th><th>Price</th></tr>
+                                </thead>
+                                <tbody id="ptz-ps-rows"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ── PACKAGES TAB ── -->
+                <div id="tab-packages" class="pricelist-panel hidden">
+                    <div class="pricelist-grid" id="packages-grid"></div>
+                </div>
+
+                <!-- Bottom CTA -->
+                <div class="text-center mt-12">
+                    <p class="text-stone-500 mb-4 text-sm">Need help choosing the right system for your home or business?</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#quote-form-section" class="primary-button px-8 py-4 rounded-xl text-base">
+                            📥 Get Your Free Quote
+                        </a>
+                        <a href="#" onclick="event.preventDefault(); window.open(buildWaURL('Hi Justo Zeal! I just viewed your price list and I\'d like help choosing the right system for my project.'), '_blank')"
+                           class="wa-cta-button px-8 py-4 rounded-xl text-base">
+                            💬 Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
         <section id="process" class="main-gradient py-16 sm:py-24">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="section-title section-title-light">Our Simple 3-Step Process</h2>
@@ -393,15 +529,15 @@
     <!-- Scroll-reveal observer -->
     <script>
         const revealEls = document.querySelectorAll('.reveal');
-        const observer  = new IntersectionObserver(entries => {
+        const revealObserver = new IntersectionObserver(entries => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
                     e.target.classList.add('visible');
-                    observer.unobserve(e.target);
+                    revealObserver.unobserve(e.target);
                 }
             });
         }, { threshold: 0.15 });
-        revealEls.forEach(el => observer.observe(el));
+        revealEls.forEach(el => revealObserver.observe(el));
     </script>
 
 </body>

@@ -755,11 +755,89 @@ window.handleLeadSubmission = function (event) {
         try {
             generateAndDownloadPDF({ name, email, phone, projectType, specificNeeds, invoiceNumber, subtotal, lineItems });
 
-            showStatus(
-                `✅ Your quote (${invoiceNumber}) has been downloaded! Total: ${fmt(subtotal)}. ` +
-                `Our team will contact you soon. You can also WhatsApp us directly below.`,
-                'success'
-            );
+            // Build pre-filled WhatsApp message with full quote context
+            const waFollowUpMsg =
+                `Hi Justo Zeal! I just downloaded my quote (${invoiceNumber}).\n\n` +
+                `👤 Name: ${name}\n` +
+                `📞 Phone: ${phone}\n` +
+                `🔧 Service: ${projectType}\n` +
+                `💰 Quote Total: ${fmt(subtotal)}\n\n` +
+                `📝 Project Details: ${specificNeeds}\n\n` +
+                `I'd like to discuss further and book a site visit.`;
+
+            const waFollowUpURL = buildWaURL(waFollowUpMsg);
+
+            // Show rich WhatsApp CTA card instead of plain status message
+            const statusEl = document.getElementById('status-message');
+            if (statusEl) {
+                statusEl.className = '';
+                statusEl.classList.remove('hidden');
+                statusEl.innerHTML = `
+                    <div style="
+                        background: linear-gradient(135deg,#f0fdf4,#dcfce7);
+                        border: 1.5px solid #86efac;
+                        border-left: 5px solid #25D366;
+                        border-radius: 16px;
+                        padding: 20px 24px;
+                        text-align: left;
+                        font-family: var(--font-body);
+                    ">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                            <span style="font-size:22px;">✅</span>
+                            <div>
+                                <p style="font-weight:700;font-size:15px;color:#14532d;margin:0;">
+                                    Your quote has been downloaded!
+                                </p>
+                                <p style="font-size:13px;color:#166534;margin:0;">
+                                    Invoice ${invoiceNumber} · Total: <strong>${fmt(subtotal)}</strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="
+                            background:#fff;
+                            border-radius:12px;
+                            padding:14px 16px;
+                            margin:14px 0;
+                            border:1px solid #bbf7d0;
+                        ">
+                            <p style="font-size:13.5px;color:#1c1917;margin:0 0 4px;font-weight:600;">
+                                📋 What happens next?
+                            </p>
+                            <p style="font-size:13px;color:#57534e;margin:0;line-height:1.6;">
+                                Your PDF quote is saved to your device. To get a confirmed price,
+                                book a free site visit and discuss payment — chat with our team
+                                directly on WhatsApp. We respond fast.
+                            </p>
+                        </div>
+
+                        <a href="${waFollowUpURL}" target="_blank" rel="noopener" style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            gap:10px;
+                            background:#25D366;
+                            color:#fff;
+                            text-decoration:none;
+                            font-weight:700;
+                            font-size:15px;
+                            padding:14px 20px;
+                            border-radius:50px;
+                            box-shadow:0 4px 16px rgba(37,211,102,0.35);
+                            margin-bottom:10px;
+                        ">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            Discuss My Quote on WhatsApp →
+                        </a>
+
+                        <p style="font-size:11.5px;color:#a8a29e;text-align:center;margin:0;">
+                            💬 Prefer to type here? Tawk.to live chat is available at the bottom of the page.
+                        </p>
+                    </div>`;
+                statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
 
             document.getElementById('quote-form-element')?.reset();
             window.updateFormFields();
@@ -801,6 +879,7 @@ window.openWhatsAppWithContext = function () {
 document.addEventListener('DOMContentLoaded', () => {
     toggleLoadingOverlay(false);
     window.updateFormFields();
+    renderPriceList();
 
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) submitBtn.innerHTML = '📥 Download Quote PDF';
@@ -864,3 +943,88 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+// ---------------------------------------------------------------------------
+// PRICE LIST — render all pricing tables from existing data objects
+// ---------------------------------------------------------------------------
+function renderPriceList() {
+
+    function rows(obj, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        if (!tbody) return;
+        tbody.innerHTML = Object.entries(obj).map(([name, price], i) => `
+            <tr>
+                <td>${name}</td>
+                <td>${fmt(price)}</td>
+            </tr>`).join('');
+    }
+
+    // Solar tab
+    rows(INVERTERS, 'inverter-rows');
+    rows(BATTERIES, 'battery-rows');
+    rows(PANELS,    'panel-rows');
+
+    // CCTV tab — cameras
+    rows(HIKVISION_CAMERAS, 'camera-price-rows');
+
+    // DVRs + NVRs merged
+    const dvrnvr = document.getElementById('dvrnvr-rows');
+    if (dvrnvr) {
+        const allDVRNVR = { ...HIKVISION_DVRS, ...HIKVISION_NVRS };
+        dvrnvr.innerHTML = Object.entries(allDVRNVR).map(([name, price]) => `
+            <tr><td>${name}</td><td>${fmt(price)}</td></tr>`).join('');
+    }
+
+    // PTZ + Power supplies merged
+    const ptzPs = document.getElementById('ptz-ps-rows');
+    if (ptzPs) {
+        const allPTZ = { ...HIKVISION_PTZ, ...HIKVISION_POWER_SUPPLIES };
+        ptzPs.innerHTML = Object.entries(allPTZ).map(([name, price]) => `
+            <tr><td>${name}</td><td>${fmt(price)}</td></tr>`).join('');
+    }
+
+    // Packages tab
+    const grid = document.getElementById('packages-grid');
+    if (grid) {
+        grid.innerHTML = Object.entries(SMART_SOLAR_CONFIGS).map(([name, cfg]) => {
+            const mat  = INVERTERS[cfg.inverter] + BATTERIES[cfg.battery] + (PANELS[cfg.panel] * cfg.panelQty) + cfg.accessories;
+            const svc  = mat * 0.15;
+            const total = mat + svc;
+            return `
+            <div class="package-card reveal">
+                <p class="package-card__name">${name}</p>
+                <p class="package-card__desc">${cfg.description}</p>
+                <ul class="package-card__items">
+                    <li><span>⚡ ${cfg.inverter}</span><span>${fmt(INVERTERS[cfg.inverter])}</span></li>
+                    <li><span>🔋 ${cfg.battery}</span><span>${fmt(BATTERIES[cfg.battery])}</span></li>
+                    <li><span>☀️ ${cfg.panelQty}× ${cfg.panel}</span><span>${fmt(PANELS[cfg.panel] * cfg.panelQty)}</span></li>
+                    <li><span>🔧 Installation & Accessories</span><span>${fmt(cfg.accessories)}</span></li>
+                    <li><span>Service Charge (15%)</span><span>${fmt(svc)}</span></li>
+                </ul>
+                <div class="package-card__total">
+                    <span class="package-card__total-label">Total Package</span>
+                    <span class="package-card__total-price">${fmt(total)}</span>
+                </div>
+                <a href="#quote-form-section"
+                   style="display:block;margin-top:12px;text-align:center;background:var(--color-primary);color:#fff;font-weight:700;font-size:13px;padding:10px;border-radius:50px;text-decoration:none;">
+                    Get This Package →
+                </a>
+            </div>`;
+        }).join('');
+
+        // Re-observe new reveal elements
+        document.querySelectorAll('.package-card.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+    }
+}
+
+// Tab switcher
+window.switchTab = function(tab) {
+    document.querySelectorAll('.pricelist-panel').forEach(p => p.classList.add('hidden'));
+    document.querySelectorAll('.pricelist-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(`tab-${tab}`)?.classList.remove('hidden');
+    const tabs = { solar: 0, cctv: 1, packages: 2 };
+    document.querySelectorAll('.pricelist-tab')[tabs[tab]]?.classList.add('active');
+};
