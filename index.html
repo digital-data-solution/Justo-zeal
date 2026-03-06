@@ -181,19 +181,82 @@
         </section>
 
         <!-- ═══════════════════════════════════════════
-             PRICE LIST
+             PRICE LIST (COLLAPSIBLE)
         ═══════════════════════════════════════════ -->
-        <section id="price-list" class="py-16 sm:py-24 bg-white">
+        <section id="price-list" class="py-12 bg-white">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <div class="text-center mb-10">
+                <!-- Toggle Button — the only thing visible by default -->
+                <div class="text-center mb-8">
                     <p class="section-eyebrow">Transparent Pricing</p>
-                    <h2 class="section-title" style="margin-bottom:0.75rem;">Our Product Price List</h2>
-                    <p class="text-stone-500 text-base max-w-2xl mx-auto">
+                    <h2 class="section-title" style="margin-bottom: 0.75rem;">Our Product Price List</h2>
+                    <p class="text-stone-500 text-sm max-w-xl mx-auto mb-4">
                         All prices shown are material costs. A 15% service charge applies on solar installations.
-                        Final pricing confirmed after free site inspection.
                     </p>
+                    <div style="
+                        display:inline-flex;
+                        align-items:flex-start;
+                        gap:10px;
+                        background:#fffbeb;
+                        border:1.5px solid #fde68a;
+                        border-left:5px solid #f59e0b;
+                        border-radius:12px;
+                        padding:12px 18px;
+                        margin-bottom:24px;
+                        max-width:600px;
+                        text-align:left;
+                        font-size:0.8125rem;
+                        color:#92400e;
+                        line-height:1.6;
+                    ">
+                        <span style="font-size:1.1rem;flex-shrink:0;margin-top:1px;">⚠️</span>
+                        <span>
+                            <strong>These are estimates only.</strong> Prices are subject to change based on
+                            current market rates, your location, and site conditions. For a precise and
+                            up-to-date quote, contact our agent directly —
+                            <a href="#" onclick="event.preventDefault();window.open(buildWaURL('Hi Justo Zeal! I just viewed your price list and I\'d like a precise quote for my project.'),\'_blank\')"
+                               style="color:#d97706;font-weight:700;text-decoration:underline;">chat with us on WhatsApp</a>
+                            or call <a href="tel:+2348114377822" style="color:#d97706;font-weight:700;">+234 811 437 7822</a>.
+                        </span>
+                    </div>
                 </div>
+
+                <!-- Toggle Button -->
+                <div class="text-center mb-6">
+                    <button id="pricelist-toggle" onclick="togglePriceList()" style="
+                        display:inline-flex;
+                        align-items:center;
+                        gap:10px;
+                        background:linear-gradient(135deg,#f97316,#ea580c);
+                        color:#fff;
+                        font-family:var(--font-display);
+                        font-weight:700;
+                        font-size:0.9375rem;
+                        padding:14px 32px;
+                        border-radius:50px;
+                        border:none;
+                        cursor:pointer;
+                        box-shadow:0 4px 14px rgba(249,115,22,0.35);
+                        transition:transform 0.15s ease, box-shadow 0.15s ease;
+                    " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(249,115,22,0.45)'"
+                       onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(249,115,22,0.35)'">
+                        <span id="pricelist-toggle-icon">📋</span>
+                        <span id="pricelist-toggle-text">View Full Price List</span>
+                        <svg id="pricelist-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                             stroke="white" stroke-width="2.5" stroke-linecap="round"
+                             style="transition:transform 0.3s ease;">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Collapsible body — hidden by default -->
+                <div id="pricelist-body" style="
+                    max-height:0;
+                    overflow:hidden;
+                    transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+                    opacity:0;
+                ">
 
                 <!-- Tab Buttons -->
                 <div class="pricelist-tabs" id="pricelist-tabs">
@@ -202,118 +265,80 @@
                     <button class="pricelist-tab" onclick="switchTab('packages')">🏠 Solar Packages</button>
                 </div>
 
-                <!-- ── SOLAR TAB ── -->
-                <div id="tab-solar" class="pricelist-panel">
-
-                    <div class="pricelist-grid">
-
-                        <!-- Inverters -->
-                        <div class="pricelist-card reveal">
-                            <div class="pricelist-card__header">
-                                <span>⚡</span> Inverters
+                    <!-- ── SOLAR TAB ── -->
+                    <div id="tab-solar" class="pricelist-panel">
+                        <div class="pricelist-grid">
+                            <div class="pricelist-card">
+                                <div class="pricelist-card__header"><span>⚡</span> Inverters</div>
+                                <table class="pricelist-table">
+                                    <thead><tr><th>Model</th><th>Price</th></tr></thead>
+                                    <tbody id="inverter-rows"></tbody>
+                                </table>
                             </div>
-                            <table class="pricelist-table">
-                                <thead>
-                                    <tr><th>Model</th><th>Price</th></tr>
-                                </thead>
-                                <tbody id="inverter-rows"></tbody>
-                            </table>
-                        </div>
-
-                        <!-- Batteries -->
-                        <div class="pricelist-card reveal" style="transition-delay:0.1s">
-                            <div class="pricelist-card__header">
-                                <span>🔋</span> Lithium Batteries
+                            <div class="pricelist-card">
+                                <div class="pricelist-card__header"><span>🔋</span> Lithium Batteries</div>
+                                <table class="pricelist-table">
+                                    <thead><tr><th>Model</th><th>Price</th></tr></thead>
+                                    <tbody id="battery-rows"></tbody>
+                                </table>
                             </div>
-                            <table class="pricelist-table">
-                                <thead>
-                                    <tr><th>Model</th><th>Price</th></tr>
-                                </thead>
-                                <tbody id="battery-rows"></tbody>
-                            </table>
-                        </div>
-
-                        <!-- Solar Panels -->
-                        <div class="pricelist-card reveal" style="transition-delay:0.2s">
-                            <div class="pricelist-card__header">
-                                <span>☀️</span> Solar Panels
+                            <div class="pricelist-card">
+                                <div class="pricelist-card__header"><span>☀️</span> Solar Panels</div>
+                                <table class="pricelist-table">
+                                    <thead><tr><th>Model</th><th>Per Panel</th></tr></thead>
+                                    <tbody id="panel-rows"></tbody>
+                                </table>
                             </div>
-                            <table class="pricelist-table">
-                                <thead>
-                                    <tr><th>Model</th><th>Per Panel</th></tr>
-                                </thead>
-                                <tbody id="panel-rows"></tbody>
-                            </table>
                         </div>
-
                     </div>
-                </div>
 
-                <!-- ── CCTV TAB ── -->
-                <div id="tab-cctv" class="pricelist-panel hidden">
-
-                    <div class="pricelist-grid">
-
-                        <!-- Cameras -->
-                        <div class="pricelist-card reveal">
-                            <div class="pricelist-card__header">
-                                <span>📷</span> Hikvision Cameras
+                    <!-- ── CCTV TAB ── -->
+                    <div id="tab-cctv" class="pricelist-panel hidden">
+                        <div class="pricelist-grid">
+                            <div class="pricelist-card">
+                                <div class="pricelist-card__header"><span>📷</span> Hikvision Cameras</div>
+                                <table class="pricelist-table">
+                                    <thead><tr><th>Model</th><th>Price</th></tr></thead>
+                                    <tbody id="camera-price-rows"></tbody>
+                                </table>
                             </div>
-                            <table class="pricelist-table">
-                                <thead>
-                                    <tr><th>Model</th><th>Price</th></tr>
-                                </thead>
-                                <tbody id="camera-price-rows"></tbody>
-                            </table>
-                        </div>
-
-                        <!-- DVRs & NVRs -->
-                        <div class="pricelist-card reveal" style="transition-delay:0.1s">
-                            <div class="pricelist-card__header">
-                                <span>📹</span> DVRs & NVRs
+                            <div class="pricelist-card">
+                                <div class="pricelist-card__header"><span>📹</span> DVRs & NVRs</div>
+                                <table class="pricelist-table">
+                                    <thead><tr><th>Model</th><th>Price</th></tr></thead>
+                                    <tbody id="dvrnvr-rows"></tbody>
+                                </table>
                             </div>
-                            <table class="pricelist-table">
-                                <thead>
-                                    <tr><th>Model</th><th>Price</th></tr>
-                                </thead>
-                                <tbody id="dvrnvr-rows"></tbody>
-                            </table>
-                        </div>
-
-                        <!-- PTZ & Accessories -->
-                        <div class="pricelist-card reveal" style="transition-delay:0.2s">
-                            <div class="pricelist-card__header">
-                                <span>🔄</span> PTZ & Power Supplies
+                            <div class="pricelist-card">
+                                <div class="pricelist-card__header"><span>🔄</span> PTZ & Power Supplies</div>
+                                <table class="pricelist-table">
+                                    <thead><tr><th>Model</th><th>Price</th></tr></thead>
+                                    <tbody id="ptz-ps-rows"></tbody>
+                                </table>
                             </div>
-                            <table class="pricelist-table">
-                                <thead>
-                                    <tr><th>Model</th><th>Price</th></tr>
-                                </thead>
-                                <tbody id="ptz-ps-rows"></tbody>
-                            </table>
                         </div>
-
                     </div>
-                </div>
 
-                <!-- ── PACKAGES TAB ── -->
-                <div id="tab-packages" class="pricelist-panel hidden">
-                    <div class="pricelist-grid" id="packages-grid"></div>
-                </div>
-
-                <!-- Bottom CTA -->
-                <div class="text-center mt-12">
-                    <p class="text-stone-500 mb-4 text-sm">Need help choosing the right system for your home or business?</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="#quote-form-section" class="primary-button px-8 py-4 rounded-xl text-base">
-                            📥 Get Your Free Quote
-                        </a>
-                        <a href="#" onclick="event.preventDefault(); window.open(buildWaURL('Hi Justo Zeal! I just viewed your price list and I\'d like help choosing the right system for my project.'), '_blank')"
-                           class="wa-cta-button px-8 py-4 rounded-xl text-base">
-                            💬 Ask on WhatsApp
-                        </a>
+                    <!-- ── PACKAGES TAB ── -->
+                    <div id="tab-packages" class="pricelist-panel hidden">
+                        <div class="pricelist-grid" id="packages-grid"></div>
                     </div>
-                </div>
+
+                    <!-- Bottom CTA -->
+                    <div class="text-center mt-10 pb-2">
+                        <p class="text-stone-500 mb-4 text-sm">Ready to order or need help choosing?</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="#quote-form-section" class="primary-button px-8 py-4 rounded-xl text-base">
+                                📥 Get Your Free Quote
+                            </a>
+                            <a href="#" onclick="event.preventDefault(); window.open(buildWaURL('Hi Justo Zeal! I just viewed your price list and I\'d like help choosing the right system for my project.'), '_blank')"
+                               class="wa-cta-button px-8 py-4 rounded-xl text-base">
+                                💬 Ask on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                </div><!-- /pricelist-body -->
 
             </div>
         </section>

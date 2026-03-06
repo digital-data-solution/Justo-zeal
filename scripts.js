@@ -700,7 +700,7 @@ function generateAndDownloadPDF(data) {
     doc.text(fmt(data.subtotal), pageW - 12, y, { align: 'right' });
     doc.setFontSize(8); doc.setFont('helvetica', 'italic'); doc.setTextColor(...gray);
     y += 5;
-    doc.text('(Prices include 15% service charge where applicable — subject to site audit)', pageW - 12, y, { align: 'right' });
+    doc.text('(Estimate only — prices subject to change. Contact agent for confirmed quote.)', pageW - 12, y, { align: 'right' });
 
     if (data.specificNeeds) {
         y += 12;
@@ -719,7 +719,7 @@ function generateAndDownloadPDF(data) {
     doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
     doc.text('Thank you for choosing Justo Zeal!', pageW / 2, footerY + 2, { align: 'center' });
     doc.text('+234 811 437 7822   |   Justozeal1@gmail.com   |   instagram.com/JUSTZEAL', pageW / 2, footerY + 7, { align: 'center' });
-    doc.text('This quote is valid for 7 days. Prices subject to site inspection.', pageW / 2, footerY + 12, { align: 'center' });
+    doc.text('This is an ESTIMATE only. Prices may change. Call +234 811 437 7822 for a confirmed quote.', pageW / 2, footerY + 12, { align: 'center' });
 
     doc.save(`JustoZeal-Quote-${data.invoiceNumber}.pdf`);
 }
@@ -1010,6 +1010,9 @@ function renderPriceList() {
                    style="display:block;margin-top:12px;text-align:center;background:var(--color-primary);color:#fff;font-weight:700;font-size:13px;padding:10px;border-radius:50px;text-decoration:none;">
                     Get This Package →
                 </a>
+                <p style="font-size:11px;color:#a8a29e;text-align:center;margin-top:8px;">
+                    ⚠️ Estimate only — contact agent for confirmed price
+                </p>
             </div>`;
         }).join('');
 
@@ -1027,4 +1030,47 @@ window.switchTab = function(tab) {
     document.getElementById(`tab-${tab}`)?.classList.remove('hidden');
     const tabs = { solar: 0, cctv: 1, packages: 2 };
     document.querySelectorAll('.pricelist-tab')[tabs[tab]]?.classList.add('active');
+};
+
+
+// ---------------------------------------------------------------------------
+// PRICE LIST TOGGLE
+// ---------------------------------------------------------------------------
+window.togglePriceList = function () {
+    const body    = document.getElementById('pricelist-body');
+    const btn     = document.getElementById('pricelist-toggle');
+    const text    = document.getElementById('pricelist-toggle-text');
+    const icon    = document.getElementById('pricelist-toggle-icon');
+
+    const isOpen = body.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+
+    text.textContent = isOpen ? 'Hide Price List' : 'View Full Price List';
+    icon.textContent = isOpen ? '✖️' : '📋';
+};
+
+
+// ---------------------------------------------------------------------------
+// PRICE LIST TOGGLE — collapse / expand
+// ---------------------------------------------------------------------------
+window.togglePriceList = function () {
+    const body     = document.getElementById('pricelist-body');
+    const chevron  = document.getElementById('pricelist-chevron');
+    const text     = document.getElementById('pricelist-toggle-text');
+    const icon     = document.getElementById('pricelist-toggle-icon');
+    const isOpen   = body.style.maxHeight !== '0px' && body.style.maxHeight !== '';
+
+    if (isOpen) {
+        body.style.maxHeight = '0px';
+        body.style.opacity   = '0';
+        chevron.style.transform = 'rotate(0deg)';
+        text.textContent = 'View Full Price List';
+        icon.textContent = '📋';
+    } else {
+        body.style.maxHeight = body.scrollHeight + 200 + 'px';
+        body.style.opacity   = '1';
+        chevron.style.transform = 'rotate(180deg)';
+        text.textContent = 'Close Price List';
+        icon.textContent = '✕';
+    }
 };
