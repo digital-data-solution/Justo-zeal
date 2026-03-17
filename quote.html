@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get a free instant quote from Justo Zeal for solar, smart home, CCTV, or electrical wiring. Your PDF downloads immediately.">
+    <title>Get a Free Quote | Justo Zeal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/68f607517d479d194d3ba2ea/1j80gp6av';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+
+    <style>
+        .page-hero {
+            background: linear-gradient(145deg, var(--color-stone-900) 0%, var(--color-stone-800) 40%, #431407 100%);
+            position: relative; overflow: hidden;
+            padding: 4rem 1rem; text-align: center;
+        }
+        .page-hero__eyebrow { font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-primary-light);margin-bottom:0.75rem; }
+        .page-hero__title { font-family:var(--font-display);font-size:clamp(1.875rem,5vw,2.75rem);font-weight:800;color:#fff;margin-bottom:1rem; }
+        .page-hero__title span { color:var(--color-primary-light); }
+        .page-hero__subtitle { font-size:1rem;color:#d6d3d1;max-width:38rem;margin:0 auto;line-height:1.7; }
+        .trust-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.8125rem; font-weight: 500;
+            padding: 6px 14px; border-radius: var(--radius-full);
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <div id="loading-overlay"><div class="spinner"></div></div>
+
+    <!-- ═══ HEADER ═══ -->
+    <header id="header">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" class="logo-img"
+                     onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
+                <span class="logo-wordmark">Justo Zeal</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="about.html"      class="nav-link">About Us</a>
+                <a href="services.html"   class="nav-link">Our Solutions</a>
+                <a href="price-list.html" class="nav-link">Price List</a>
+                <a href="index.html#process" class="nav-link">How It Works</a>
+                <a href="quote.html" class="primary-button px-5 py-2.5 text-sm rounded-lg" style="opacity:0.7;pointer-events:none;">Get a Quote</a>
+            </nav>
+            <button id="mobile-menu-button" onclick="toggleMobileMenu()"
+                    class="md:hidden text-stone-600 hover:text-orange-500 focus:outline-none">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+                <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="mobile-menu-slide md:hidden">
+            <div class="flex flex-col p-4 gap-2">
+                <a href="about.html"      onclick="closeMobileMenu()" class="mobile-nav-link">About Us</a>
+                <a href="services.html"   onclick="closeMobileMenu()" class="mobile-nav-link">Our Solutions</a>
+                <a href="price-list.html" onclick="closeMobileMenu()" class="mobile-nav-link">Price List</a>
+                <a href="index.html#process" onclick="closeMobileMenu()" class="mobile-nav-link">How It Works</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ═══ PAGE HERO ═══ -->
+        <div class="page-hero">
+            <div class="hero-glow-top"></div>
+            <p class="page-hero__eyebrow">Project Estimator</p>
+            <h1 class="page-hero__title">Get Your <span>Free Quote</span> Today</h1>
+            <p class="page-hero__subtitle">Fill in your details — your PDF quote downloads instantly. No email or account required.</p>
+            <div class="flex flex-wrap justify-center gap-3 mt-6">
+                <span class="trust-badge">⚡ Instant PDF Download</span>
+                <span class="trust-badge">🔒 No spam — your data stays private</span>
+                <span class="trust-badge">💬 Follow-up via WhatsApp</span>
+            </div>
+        </div>
+
+        <!-- ═══ FORM ═══ -->
+        <section class="py-14 bg-stone-50">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="status-message" class="hidden" role="alert"></div>
+                <form id="quote-form-element" onsubmit="handleLeadSubmission(event)">
+                    <h3 class="form-section-label">1. Your Contact Details</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+                        <div>
+                            <label for="name" class="form-label">Full Name <span class="form-required">*</span></label>
+                            <input type="text" id="name" name="name" required placeholder="e.g., Chidi Okafor" class="form-input">
+                        </div>
+                        <div>
+                            <label for="email" class="form-label">Email Address <span class="form-required">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="you@example.com" class="form-input">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="phone" class="form-label">Phone Number <span class="form-required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+234 800 000 0000" class="form-input">
+                        </div>
+                    </div>
+                    <h3 class="form-section-label">2. Project Requirements</h3>
+                    <div class="mb-5">
+                        <label for="project_type" class="form-label">Type of Project <span class="form-required">*</span></label>
+                        <p class="text-xs text-stone-400 mb-2">Selecting a service unlocks additional pricing fields below.</p>
+                        <select id="project_type" name="projectType" required class="form-input" onchange="updateFormFields()">
+                            <option value="">— Select a Service —</option>
+                            <option value="Solar/Inverter">☀️  Solar / Inverter Installation</option>
+                            <option value="Smart Home">🏠  Smart Home Automation</option>
+                            <option value="CCTV/Security">📷  CCTV / Security System</option>
+                            <option value="Electrical Wiring">⚡  New Electrical Wiring</option>
+                            <option value="Multiple">🔧  Multiple Services</option>
+                        </select>
+                    </div>
+                    <div id="dynamic-fields" class="mb-5 space-y-4"></div>
+                    <div class="mb-6">
+                        <label for="specificNeeds" class="form-label">Project Details <span class="form-required">*</span> <span class="form-label-hint">(describe your needs)</span></label>
+                        <textarea id="specificNeeds" name="specificNeeds" rows="4" required class="form-input" placeholder="e.g., 5kVA solar for 3-bedroom house, 8 outdoor cameras for warehouse, automate lighting in 4 rooms…"></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button type="submit" id="submit-button" class="primary-button w-full py-4 text-base rounded-xl">📥 Download Quote PDF</button>
+                        <button type="button" onclick="openWhatsAppWithContext()" class="wa-cta-button w-full py-4 text-base rounded-xl">💬 Chat on WhatsApp</button>
+                    </div>
+                    <p class="text-center text-xs text-stone-400 mt-4">🔒 Your information is kept private. Quote downloads instantly — no email required.</p>
+                </form>
+
+                <!-- After-form trust signals -->
+                <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <div class="text-center p-4 bg-white rounded-xl shadow-sm border border-stone-100">
+                        <div style="font-size:1.75rem;margin-bottom:0.5rem">📄</div>
+                        <p class="text-sm font-semibold text-stone-700">Instant PDF</p>
+                        <p class="text-xs text-stone-500">Your itemised quote downloads right away</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-sm border border-stone-100">
+                        <div style="font-size:1.75rem;margin-bottom:0.5rem">🔍</div>
+                        <p class="text-sm font-semibold text-stone-700">Free Site Audit</p>
+                        <p class="text-xs text-stone-500">We visit and confirm exact pricing</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-sm border border-stone-100">
+                        <div style="font-size:1.75rem;margin-bottom:0.5rem">🛠️</div>
+                        <p class="text-sm font-semibold text-stone-700">Certified Install</p>
+                        <p class="text-xs text-stone-500">Professionally commissioned &amp; tested</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <a href="index.html"><div class="footer-logo-wrap"><img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';"></div></a>
+            <p class="text-stone-500 font-semibold mb-1">&copy; 2025 Justo Zeal. All Rights Reserved.</p>
+            <p class="mt-2"><a href="mailto:Justozeal1@gmail.com">Justozeal1@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+2348114377822">+234 811 437 7822</a></p>
+            <div class="mt-3 flex justify-center gap-4"><a href="https://www.instagram.com/JUSTZEAL" target="_blank">Instagram @JUSTZEAL</a><span>·</span><a href="#">Facebook</a></div>
+            <div class="mt-3 flex justify-center gap-4 text-xs">
+                <a href="about.html"   style="color:#a8a29e;transition:color 0.15s;" onmouseover="this.style.color='#fb923c'" onmouseout="this.style.color='#a8a29e'">About Us</a>
+                <span class="text-stone-700">·</span>
+                <a href="privacy.html" style="color:#a8a29e;transition:color 0.15s;" onmouseover="this.style.color='#fb923c'" onmouseout="this.style.color='#a8a29e'">Privacy Policy</a>
+            </div>
+            <p class="mt-4 text-stone-600 text-xs">WhatsApp integration by <a href="https://xpressdigitalanddatasolutions.online" target="_blank" rel="noopener" style="color:#25D366;font-weight:600;">Xpress Digital &amp; Data Solutions Ltd</a></p>
+        </div>
+    </footer>
+
+    <!-- ═══ WHATSAPP WIDGET ═══ -->
+    <div id="wa-widget">
+        <div id="wa-popup">
+            <div class="wa-popup-header"><div class="wa-avatar">⚡</div><div class="wa-popup-header-text"><h4>Justo Zeal</h4><p><span class="wa-status-dot"></span> Typically replies instantly</p></div></div>
+            <div class="wa-popup-body"><div class="wa-bubble">👋 Hi! Need a solar, CCTV or smart home quote?<br>Chat with us directly on WhatsApp — fast response guaranteed.<div class="wa-bubble-time">Just now</div></div></div>
+            <div class="wa-popup-cta"><a id="wa-cta-link" href="#" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Start WhatsApp Chat</a></div>
+        </div>
+        <span id="wa-tooltip">Chat on WhatsApp</span>
+        <button id="wa-fab" aria-label="Chat with Justo Zeal on WhatsApp">
+            <span id="wa-badge">1</span>
+            <svg class="icon-wa" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Auto-select project type from URL ?type= param (e.g., from services.html links)
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const typeParam = params.get('type');
+            if (typeParam) {
+                const sel = document.getElementById('project_type');
+                if (sel) {
+                    sel.value = typeParam;
+                    updateFormFields();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

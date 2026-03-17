@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Justo Zeal services: Solar & Inverter installation, Smart Home Automation, CCTV Security, and Electrical Wiring across Nigeria.">
+    <title>Our Solutions | Justo Zeal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/68f607517d479d194d3ba2ea/1j80gp6av';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+
+    <style>
+        .page-hero {
+            background: linear-gradient(145deg, var(--color-stone-900) 0%, var(--color-stone-800) 40%, #431407 100%);
+            position: relative; overflow: hidden;
+            padding: 5rem 1rem; text-align: center;
+        }
+        .page-hero__eyebrow { font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-primary-light);margin-bottom:0.75rem; }
+        .page-hero__title { font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#fff;margin-bottom:1rem; }
+        .page-hero__title span { color:var(--color-primary-light); }
+        .page-hero__subtitle { font-size:1.0625rem;color:#d6d3d1;max-width:42rem;margin:0 auto;line-height:1.7; }
+
+        .service-section { scroll-margin-top: 90px; }
+
+        .service-detail-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border-top: 5px solid var(--color-primary);
+        }
+        .service-detail-card__image {
+            width: 100%; height: 260px; object-fit: cover;
+        }
+        .service-detail-card__body { padding: 2rem 2rem 2.5rem; }
+        .service-detail-card__badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--color-primary-xlight);
+            color: var(--color-primary-dark);
+            font-size: 0.75rem; font-weight: 700;
+            padding: 4px 12px; border-radius: var(--radius-full);
+            text-transform: uppercase; letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+        .service-detail-card__title {
+            font-family: var(--font-display);
+            font-size: 1.5rem; font-weight: 800;
+            color: var(--color-stone-900); margin-bottom: 0.75rem;
+        }
+        .service-detail-card__text {
+            font-size: 0.9375rem; color: var(--color-stone-600);
+            line-height: 1.75; margin-bottom: 1.25rem;
+        }
+        .service-feature-list { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .service-feature-list li {
+            font-size: 0.9rem; color: var(--color-stone-700);
+            padding-left: 1.5rem; position: relative; line-height: 1.5;
+        }
+        .service-feature-list li::before {
+            content: "✓";
+            position: absolute; left: 0;
+            color: var(--color-primary); font-weight: 800;
+        }
+        .nav-pill-bar {
+            display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+            padding: 1rem; background: var(--color-white);
+            border-bottom: 1px solid var(--color-stone-100);
+            position: sticky; top: 70px; z-index: 15;
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-pill {
+            padding: 8px 20px; border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-stone-200);
+            background: var(--color-white);
+            color: var(--color-stone-600);
+            font-size: 0.875rem; font-weight: 600; cursor: pointer;
+            text-decoration: none; transition: var(--transition-fast);
+        }
+        .nav-pill:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <div id="loading-overlay"><div class="spinner"></div></div>
+
+    <!-- ═══ HEADER ═══ -->
+    <header id="header">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" class="logo-img"
+                     onerror="this.onerror=null; this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';">
+                <span class="logo-wordmark">Justo Zeal</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="about.html"      class="nav-link">About Us</a>
+                <a href="services.html"   class="nav-link" style="color:var(--color-primary)">Our Solutions</a>
+                <a href="price-list.html" class="nav-link">Price List</a>
+                <a href="index.html#process" class="nav-link">How It Works</a>
+                <a href="quote.html" class="primary-button px-5 py-2.5 text-sm rounded-lg">Get a Quote</a>
+            </nav>
+            <button id="mobile-menu-button" onclick="toggleMobileMenu()"
+                    class="md:hidden text-stone-600 hover:text-orange-500 focus:outline-none">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+                <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="mobile-menu-slide md:hidden">
+            <div class="flex flex-col p-4 gap-2">
+                <a href="about.html"      onclick="closeMobileMenu()" class="mobile-nav-link">About Us</a>
+                <a href="services.html"   onclick="closeMobileMenu()" class="mobile-nav-link" style="color:var(--color-primary)">Our Solutions</a>
+                <a href="price-list.html" onclick="closeMobileMenu()" class="mobile-nav-link">Price List</a>
+                <a href="index.html#process" onclick="closeMobileMenu()" class="mobile-nav-link">How It Works</a>
+                <a href="quote.html" onclick="closeMobileMenu()"
+                   class="primary-button mt-2 py-3 text-sm rounded-xl text-center">Get a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ═══ PAGE HERO ═══ -->
+        <div class="page-hero">
+            <div class="hero-glow-top"></div>
+            <p class="page-hero__eyebrow">What We Do</p>
+            <h1 class="page-hero__title">Our <span>Technology Solutions</span></h1>
+            <p class="page-hero__subtitle">From solar energy to smart home automation and certified security — one trusted team for every installation need.</p>
+        </div>
+
+        <!-- ═══ SERVICE NAV PILLS ═══ -->
+        <nav class="nav-pill-bar">
+            <a href="#solar"       class="nav-pill">☀️ Solar & Inverters</a>
+            <a href="#smart-home"  class="nav-pill">🏠 Smart Home</a>
+            <a href="#cctv"        class="nav-pill">📷 CCTV & Security</a>
+            <a href="#electrical"  class="nav-pill">⚡ Electrical Wiring</a>
+        </nav>
+
+        <!-- ═══ SOLAR ═══ -->
+        <section id="solar" class="service-section py-16 sm:py-20 bg-stone-50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <div class="service-detail-card">
+                            <img src="images/solar panel.jpg" alt="Solar Installation" class="service-detail-card__image"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x260/f97316/ffffff?text=Solar+Power';">
+                        </div>
+                    </div>
+                    <div class="reveal" style="transition-delay:0.1s">
+                        <span class="service-detail-card__badge">☀️ Service 01</span>
+                        <h2 class="service-detail-card__title">Solar Power & Inverter Systems</h2>
+                        <p class="service-detail-card__text">
+                            Cut your electricity bills and break free from grid dependency. We design and install complete solar systems
+                            — from compact 3kVA home setups to large 20kVA commercial systems — using premium brands like Africell,
+                            Jinko Bifacial, Sunpower, and Trina panels paired with IVEM/IVPS/IVGM inverters and lithium battery banks.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li>Smart auto-configuration for 1–3 bedroom homes</li>
+                            <li>Lithium battery storage from 5kWh to 25kWh</li>
+                            <li>Hybrid inverters with grid-tie and off-grid capability</li>
+                            <li>Professional mounting, cabling, and circuit breaker installation</li>
+                            <li>Post-install monitoring and maintenance support</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="quote.html?type=Solar%2FInverter" class="primary-button px-6 py-3 rounded-xl text-sm">Get Solar Quote →</a>
+                            <a href="price-list.html#solar" class="secondary-button px-6 py-3 rounded-xl text-sm">View Solar Prices</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SMART HOME ═══ -->
+        <section id="smart-home" class="service-section py-16 sm:py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-last lg:order-first reveal" style="transition-delay:0.1s">
+                        <span class="service-detail-card__badge">🏠 Service 02</span>
+                        <h2 class="service-detail-card__title">Smart Home & Automation</h2>
+                        <p class="service-detail-card__text">
+                            Transform your home into an intelligent living space. We integrate smart lighting, automated climate
+                            control, motorised curtains, smart locks, and whole-home control via a single mobile app.
+                            Whether it's a single room or a full duplex, we tailor every system to your lifestyle.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li>Smart lighting control — dimmers, schedules, scenes</li>
+                            <li>AC and climate automation with remote access</li>
+                            <li>Motorised curtain and blind integration</li>
+                            <li>Smart door locks and access control</li>
+                            <li>Single-app control for all connected devices</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="quote.html?type=Smart%20Home" class="primary-button px-6 py-3 rounded-xl text-sm">Get Smart Home Quote →</a>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="service-detail-card">
+                            <img src="images/smart_homes.jpg" alt="Smart Home Automation" class="service-detail-card__image"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x260/1F2937/ffffff?text=Smart+Home';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CCTV ═══ -->
+        <section id="cctv" class="service-section py-16 sm:py-20 bg-stone-50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <div class="service-detail-card">
+                            <img src="images/cctv-security-camera-ceiling__1_-removebg-preview.png" alt="CCTV Security" class="service-detail-card__image"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x260/f97316/ffffff?text=CCTV+Security';">
+                        </div>
+                    </div>
+                    <div class="reveal" style="transition-delay:0.1s">
+                        <span class="service-detail-card__badge">📷 Service 03</span>
+                        <h2 class="service-detail-card__title">CCTV & Security Systems</h2>
+                        <p class="service-detail-card__text">
+                            Protect what matters most with certified Hikvision surveillance solutions. From basic 4-camera analogue
+                            setups to advanced 32-channel AcuSense IP systems with AI detection, we design security infrastructure
+                            that keeps your home and business monitored around the clock.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li>Hikvision 2MP–4MP dome, bullet, and PTZ cameras</li>
+                            <li>4CH to 32CH DVR and NVR recorders</li>
+                            <li>Full-colour night vision and smart hybrid light cameras</li>
+                            <li>Remote mobile viewing via Hik-Connect app</li>
+                            <li>Alarm systems — standalone or integrated with CCTV</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="quote.html?type=CCTV%2FSecurity" class="primary-button px-6 py-3 rounded-xl text-sm">Get CCTV Quote →</a>
+                            <a href="price-list.html#cctv" class="secondary-button px-6 py-3 rounded-xl text-sm">View CCTV Prices</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ ELECTRICAL WIRING ═══ -->
+        <section id="electrical" class="service-section py-16 sm:py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-last lg:order-first reveal" style="transition-delay:0.1s">
+                        <span class="service-detail-card__badge">⚡ Service 04</span>
+                        <h2 class="service-detail-card__title">New Electrical Wiring</h2>
+                        <p class="service-detail-card__text">
+                            Whether you're building from scratch or renovating, our certified electricians handle all aspects of
+                            residential and commercial electrical wiring — from consumer units and circuit breakers to full house
+                            wiring, power sockets, and outdoor fittings.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li>Full residential and commercial wiring</li>
+                            <li>Consumer unit / distribution board installation</li>
+                            <li>Power socket and light fitting installation</li>
+                            <li>Earthing and bonding to SON standards</li>
+                            <li>Wiring for generator changeover switches</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="quote.html?type=Electrical%20Wiring" class="primary-button px-6 py-3 rounded-xl text-sm">Get Wiring Quote →</a>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="service-detail-card" style="background:linear-gradient(135deg,#fff7ed,#ffedd5);display:flex;align-items:center;justify-content:center;min-height:260px;">
+                            <span style="font-size:7rem;">⚡</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CTA ═══ -->
+        <section class="main-gradient py-16">
+            <div class="max-w-3xl mx-auto px-4 text-center">
+                <h2 class="text-3xl font-extrabold text-white mb-4" style="font-family:var(--font-display)">Need Multiple Services?</h2>
+                <p class="text-stone-300 mb-8">We handle combined projects — solar + CCTV + smart home — with one team and one coordinated installation timeline.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="quote.html" class="primary-button px-8 py-4 rounded-xl text-base">📥 Get My Free Quote</a>
+                    <a href="price-list.html" class="secondary-button px-8 py-4 rounded-xl text-base" style="border-color:#fff;color:#fff;">📋 View Price List</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <a href="index.html"><div class="footer-logo-wrap"><img src="images/logo-removebg-preview.png" alt="Justo Zeal Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x40/f97316/ffffff?text=JZ';"></div></a>
+            <p class="text-stone-500 font-semibold mb-1">&copy; 2025 Justo Zeal. All Rights Reserved.</p>
+            <p class="mt-2"><a href="mailto:Justozeal1@gmail.com">Justozeal1@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+2348114377822">+234 811 437 7822</a></p>
+            <div class="mt-3 flex justify-center gap-4"><a href="https://www.instagram.com/JUSTZEAL" target="_blank">Instagram @JUSTZEAL</a><span>·</span><a href="#">Facebook</a></div>
+            <div class="mt-3 flex justify-center gap-4 text-xs">
+                <a href="about.html"   style="color:#a8a29e;transition:color 0.15s;" onmouseover="this.style.color='#fb923c'" onmouseout="this.style.color='#a8a29e'">About Us</a>
+                <span class="text-stone-700">·</span>
+                <a href="privacy.html" style="color:#a8a29e;transition:color 0.15s;" onmouseover="this.style.color='#fb923c'" onmouseout="this.style.color='#a8a29e'">Privacy Policy</a>
+            </div>
+            <p class="mt-4 text-stone-600 text-xs">WhatsApp integration by <a href="https://xpressdigitalanddatasolutions.online" target="_blank" rel="noopener" style="color:#25D366;font-weight:600;">Xpress Digital &amp; Data Solutions Ltd</a></p>
+        </div>
+    </footer>
+
+    <!-- ═══ WHATSAPP WIDGET ═══ -->
+    <div id="wa-widget">
+        <div id="wa-popup">
+            <div class="wa-popup-header"><div class="wa-avatar">⚡</div><div class="wa-popup-header-text"><h4>Justo Zeal</h4><p><span class="wa-status-dot"></span> Typically replies instantly</p></div></div>
+            <div class="wa-popup-body"><div class="wa-bubble">👋 Hi! Need a solar, CCTV or smart home quote?<br>Chat with us directly on WhatsApp — fast response guaranteed.<div class="wa-bubble-time">Just now</div></div></div>
+            <div class="wa-popup-cta"><a id="wa-cta-link" href="#" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Start WhatsApp Chat</a></div>
+        </div>
+        <span id="wa-tooltip">Chat on WhatsApp</span>
+        <button id="wa-fab" aria-label="Chat with Justo Zeal on WhatsApp">
+            <span id="wa-badge">1</span>
+            <svg class="icon-wa" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
